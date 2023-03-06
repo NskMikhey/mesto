@@ -91,5 +91,24 @@
 
     </main>
   </div>
+
+  <section class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button button" type="button" aria-label="Закрыть окно"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__content" name="profileContent">
+        <fieldset class="popup__fieldset">
+          <label class="popup__input-group" for="profile_name">
+            <input class="popup__input" type="text" placeholder="Ваше имя" value="" name="name" id="profile_name">
+          </label>
+          <label class="popup__input-group" for="profile_about">
+            <input class="popup__input" type="text" placeholder="Вид деятельности" value="" name="about" id="profile_about">
+          </label>
+        </fieldset>
+        <button class="popup__submit" type="submit" data-value="Сохранить">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
 </body>
 </html>
