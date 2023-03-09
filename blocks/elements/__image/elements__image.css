@@ -3,10 +3,5 @@
   min-height: 282px;
   max-height: 282px;
   vertical-align: top;
-  transition: .3s;
   object-fit: cover;
-}
-
-.elements__image:hover {
-  opacity: 0.85;
 }
