@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
-  display: none;
-  transition: all 0.4s;
+  visibility: hidden;
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
 }

@@ -6,11 +6,11 @@
   background-image: url(../../../images/editPen.svg);
   border: 1px solid #fff;
   background-repeat: no-repeat;
-  background-color: black;
+  background-color: transparent;
   background-position: center;
   margin: 0;
   padding: 0;
-}
+  }
 
 @media screen and (max-width: 767px) {
   .profile__edit-button {
