@@ -15,7 +15,6 @@
       <img class="header__logo" src="./images/headerLogo.svg" alt="лого место">
     </header>
     <main class="content">
-
       <section class="profile">
         <img class="profile__avatar-photo" src="./images/ava.png" alt="аватар">
         <div class="profile__info">
@@ -30,61 +29,49 @@
         <article class="elements__card">
           <img src="./images/ben-wicks-0DmqMJloWmI-unsplash.jpg" alt="Венгерский парламент" class="elements__image">
           <div class="elements__info">
-            <p class="elements__title">Венгерский парламент</p>
-            <div class="elements__likes-group">
-              <button class="elements__like elements__like_active button-hover" type="button"></button>
-            </div>
+            <h2 class="elements__title">Венгерский парламент</h2>
+            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
           </div>
         </article>
         <article class="elements__card">
           <img src="./images/tino-rischawy-iXtCbXSRkvg-unsplash.jpg" alt="Арльберг" class="elements__image">
           <div class="elements__info">
-            <p class="elements__title">Арльберг</p>
-            <div class="elements__likes-group">
-              <button class="elements__like elements__like_active button-hover" type="button"></button>
-            </div>
+            <h2 class="elements__title">Арльберг</h2>
+            <button class="elements__like button-hover" type="button" aria-label="лайк"aria-label="лайк"></button>
           </div>
         </article>
         <article class="elements__card">
           <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаевск" class="elements__image">
           <div class="elements__info">
-            <p class="elements__title">Карачаевск</p>
-            <div class="elements__likes-group">
-              <button class="elements__like elements__like_active button-hover" type="button"></button>
-            </div>
+            <h2 class="elements__title">Карачаевск</h2>
+            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
           </div>
         </article>
         <article class="elements__card">
           <img src="./images/aleksandr-popov-aW50su5Dwek-unsplash.jpg" alt="Мтазминда" class="elements__image">
           <div class="elements__info">
-            <p class="elements__title">Мтазминда</p>
-            <div class="elements__likes-group">
-              <button class="elements__like elements__like_active button-hover" type="button"></button>
-            </div>
+            <h2 class="elements__title">Мтазминда</h2>
+            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
           </div>
         </article>
         <article class="elements__card">
           <img src="./images/josh-hild-Sfm68xRcrI4-unsplash.jpg" alt="Сан-Франциско" class="elements__image">
           <div class="elements__info">
-            <p class="elements__title">Сан-Франциско</p>
-            <div class="elements__likes-group">
-              <button class="elements__like elements__like_active button-hover" type="button"></button>
-            </div>
+            <h2 class="elements__title">Сан-Франциско</h2>
+            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
           </div>
         </article>
         <article class="elements__card">
           <img src="./images/lawrence-chismorie-fBA-XFJ8ITc-unsplash.jpg" alt="Будапешт" class="elements__image">
           <div class="elements__info">
-            <p class="elements__title">Будапешт</p>
-            <div class="elements__likes-group">
-              <button class="elements__like elements__like_active button-hover" type="button"></button>
-            </div>
+            <h2 class="elements__title">Будапешт</h2>
+            <button class="elements__like elements__like_active button-hover" type="button" aria-label="лайк"></button>
           </div>
         </article>
       </section>
 
       <footer class="footer">
-        <p class="footer__copyright">© 2023 Mesto Russia</p>
+        <p class="footer__copyright" lang="en">© 2023 Mesto Russia</p>
       </footer>
 
     </main>
@@ -95,15 +82,9 @@
       <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__content" name="profileContent">
-        <fieldset class="popup__fieldset">
-          <label class="popup__input-group" for="profile_name">
-            <input class="popup__input" type="text" placeholder="Ваше имя" value="Имя" name="name" id="profile_name">
-          </label>
-          <label class="popup__input-group" for="profile_about">
-            <input class="popup__input" type="text" placeholder="Вид деятельности" value="О себе" name="about" id="profile_about">
-          </label>
-        </fieldset>
-        <button class="popup__submit" type="submit" value="Сохранить">Сохранить</button>
+        <input class="popup__input" type="text" placeholder="Ваше имя" value="Имя" name="name" id="profile_name">
+        <input class="popup__input" type="text" placeholder="Вид деятельности" value="О себе" name="about" id="profile_about">
+        <button class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
   </section>
