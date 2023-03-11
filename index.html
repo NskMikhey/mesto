@@ -5,31 +5,29 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesto</title>
+  <title lang="en">Mesto</title>
   <link rel="stylesheet" href="./pages/index.css" type="text/css">
 </head>
 
 <body class="page">
-  <div class="content">
+
     <header class="header">
       <img class="header__logo" src="./images/headerLogo.svg" alt="лого место">
     </header>
-    <main class="main">
+    <main class="content">
 
       <section class="profile">
-        <div class="profile__avatar">
-          <img class="profile__avatar-photo" src="./images/ava.png" alt="аватар">
-        </div>
+        <img class="profile__avatar-photo" src="./images/ava.png" alt="аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button button-hover" type="button"></button>
+          <button class="profile__edit-button button-hover" type="button" title="Отредактировать данные" aria-label="Редактировать профиль"></button>
           <p class="profile__about">Исследователь океана</p>
         </div>
-        <button class="profile__add-button button-hover" type="button"></button>
+        <button class="profile__add-button button-hover" type="button" title="Добавить фото" aria-label="Добавить фото"></button>
       </section>
 
       <section class="elements" aria-label="фото карточки">
-        <div class="elements__card">
+        <article class="elements__card">
           <img src="./images/ben-wicks-0DmqMJloWmI-unsplash.jpg" alt="Венгерский парламент" class="elements__image">
           <div class="elements__info">
             <p class="elements__title">Венгерский парламент</p>
@@ -37,8 +35,8 @@
               <button class="elements__like elements__like_active button-hover" type="button"></button>
             </div>
           </div>
-        </div>
-        <div class="elements__card">
+        </article>
+        <article class="elements__card">
           <img src="./images/tino-rischawy-iXtCbXSRkvg-unsplash.jpg" alt="Арльберг" class="elements__image">
           <div class="elements__info">
             <p class="elements__title">Арльберг</p>
@@ -46,8 +44,8 @@
               <button class="elements__like elements__like_active button-hover" type="button"></button>
             </div>
           </div>
-        </div>
-        <div class="elements__card">
+        </article>
+        <article class="elements__card">
           <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаевск" class="elements__image">
           <div class="elements__info">
             <p class="elements__title">Карачаевск</p>
@@ -55,8 +53,8 @@
               <button class="elements__like elements__like_active button-hover" type="button"></button>
             </div>
           </div>
-        </div>
-        <div class="elements__card">
+        </article>
+        <article class="elements__card">
           <img src="./images/aleksandr-popov-aW50su5Dwek-unsplash.jpg" alt="Мтазминда" class="elements__image">
           <div class="elements__info">
             <p class="elements__title">Мтазминда</p>
@@ -64,8 +62,8 @@
               <button class="elements__like elements__like_active button-hover" type="button"></button>
             </div>
           </div>
-        </div>
-        <div class="elements__card">
+        </article>
+        <article class="elements__card">
           <img src="./images/josh-hild-Sfm68xRcrI4-unsplash.jpg" alt="Сан-Франциско" class="elements__image">
           <div class="elements__info">
             <p class="elements__title">Сан-Франциско</p>
@@ -73,8 +71,8 @@
               <button class="elements__like elements__like_active button-hover" type="button"></button>
             </div>
           </div>
-        </div>
-        <div class="elements__card">
+        </article>
+        <article class="elements__card">
           <img src="./images/lawrence-chismorie-fBA-XFJ8ITc-unsplash.jpg" alt="Будапешт" class="elements__image">
           <div class="elements__info">
             <p class="elements__title">Будапешт</p>
@@ -82,7 +80,7 @@
               <button class="elements__like elements__like_active button-hover" type="button"></button>
             </div>
           </div>
-        </div>
+        </article>
       </section>
 
       <footer class="footer">
@@ -90,7 +88,7 @@
       </footer>
 
     </main>
-  </div>
+
 
   <section class="popup">
     <div class="popup__container">
