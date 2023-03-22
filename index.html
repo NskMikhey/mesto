@@ -25,50 +25,7 @@
         <button class="profile__add-button button-hover" type="button" title="Добавить фото" aria-label="Добавить фото"></button>
       </section>
 
-      <section class="elements" aria-label="фото карточки">
-        <article class="elements__card">
-          <img src="./images/ben-wicks-0DmqMJloWmI-unsplash.jpg" alt="Венгерский парламент" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__title">Венгерский парламент</h2>
-            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-        <article class="elements__card">
-          <img src="./images/tino-rischawy-iXtCbXSRkvg-unsplash.jpg" alt="Арльберг" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__title">Арльберг</h2>
-            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-        <article class="elements__card">
-          <img src="./images/kirill-pershin-1088404-unsplash.png" alt="Карачаевск" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-        <article class="elements__card">
-          <img src="./images/aleksandr-popov-aW50su5Dwek-unsplash.jpg" alt="Мтазминда" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__title">Мтазминда</h2>
-            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-        <article class="elements__card">
-          <img src="./images/josh-hild-Sfm68xRcrI4-unsplash.jpg" alt="Сан-Франциско" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__title">Сан-Франциско</h2>
-            <button class="elements__like button-hover" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-        <article class="elements__card">
-          <img src="./images/lawrence-chismorie-fBA-XFJ8ITc-unsplash.jpg" alt="Будапешт" class="elements__image">
-          <div class="elements__info">
-            <h2 class="elements__title">Будапешт</h2>
-            <button class="elements__like elements__like_active button-hover" type="button" aria-label="лайк"></button>
-          </div>
-        </article>
-      </section>
+      <section class="elements" aria-label="фото карточки"></section>
 
       <footer class="footer">
         <p class="footer__copyright" lang="en">© 2023 Mesto Russia</p>
@@ -76,7 +33,8 @@
 
     </main>
 
-  <section class="popup">
+  <!-- Edit profile popup -->
+  <section class="popup edit-profile">
     <div class="popup__container">
       <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -87,6 +45,40 @@
       </form>
     </div>
   </section>
+
+  <!-- New place popup -->
+  <section class="popup new-place">
+    <div class="popup__container">
+      <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="form" name="newPlaceForm">
+        <input class="popup__input popup__input_place_title" type="text" placeholder="Название" name="place-title" id="place-title">
+        <input class="popup__input popup__input_place_description" type="text" placeholder="Ссылка на картинку" name="place-description" id="place-description">
+        <button class="popup__submit" type="submit" aria-label="Создать">Создать</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- View image popup -->
+  <section class="popup image-popup">
+    <article class="popup__image-container">
+      <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
+      <img src="./images/headerLogo.svg" alt="Описание картинки" class="popup__image"/>
+      <p class="popup__image-title"></p>
+    </article>
+  </section>
+
+  <!-- Card Template -->
+  <template class="card-template">
+    <article class="card">
+      <img src="./images/Vector.svg" alt="Карточка" class="card__image" />
+      <button class="card__remove" aria-label="Удалить карточку"></button>
+      <div class="card__info">
+        <h2 class="card__title"></h2>
+        <button type="button" class="card__button" aria-label="лайк"></button>
+      </div>
+    </article>
+  </template>
 
   <script src="./scripts/index.js"></script>
 
