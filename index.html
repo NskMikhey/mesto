@@ -33,6 +33,18 @@
 
     </main>
 
+  <!-- Card Template -->
+  <template class="card-template">
+    <article class="card">
+      <img src="./images/delButton.png" alt="Карточка" class="card__image" />
+      <button class="card__remove button-hover" aria-label="Удалить карточку"></button>
+      <div class="card__info">
+        <h2 class="card__title"></h2>
+        <button type="button" class="card__like button-hover" aria-label="лайк"></button>
+      </div>
+    </article>
+  </template>
+
   <!-- Edit profile popup -->
   <section class="popup edit-profile">
     <div class="popup__container">
@@ -67,18 +79,6 @@
       <p class="popup__image-title"></p>
     </article>
   </section>
-
-  <!-- Card Template -->
-  <template class="card-template">
-    <article class="card">
-      <img src="./images/delButton.png" alt="Карточка" class="card__image" />
-      <button class="card__remove button-hover" aria-label="Удалить карточку"></button>
-      <div class="card__info">
-        <h2 class="card__title"></h2>
-        <button type="button" class="card__like button-hover" aria-label="лайк"></button>
-      </div>
-    </article>
-  </template>
 
   <script src="./scripts/index.js"></script>
 
