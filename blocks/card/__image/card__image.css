@@ -4,4 +4,5 @@
   max-height: 282px;
   vertical-align: top;
   object-fit: cover;
+  cursor: pointer;
 }
