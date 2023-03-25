@@ -111,7 +111,7 @@ function createCard(data) {
     popupImage.src = data.link;
     popupImage.alt = data.name;
     popupTitle.textContent = data.name;
-    imagePopup.classList.add('popup_is-opened');
+    openPopup(imagePopup);
   });
 
   //Cлушатель на корзину
