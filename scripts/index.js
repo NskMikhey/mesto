@@ -52,13 +52,6 @@ const closePopup = () => {
 //Слушатель на закрытие
 exitButtons.forEach((exit) => exit.addEventListener('click', closePopup));
 
-//События в форме профиля
-const handleProfileFormSubmit = (evt) => {
-  evt.preventDefault();
-  nameProfile.textContent = nameInput.value;
-  aboutProfile.textContent = aboutInput.value;
-  closePopup();
-};
 
 //массив с карточками
 const cardContainer = document.querySelector('.elements');
@@ -122,9 +115,17 @@ function createCard(data) {
     return card;
   }
 
-  initialCards.forEach(elem => {
-    cardContainer.append(createCard(elem));
-  });
+initialCards.forEach(elem => {
+  cardContainer.append(createCard(elem));
+});
+
+//События в форме профиля
+const handleProfileFormSubmit = (evt) => {
+  evt.preventDefault();
+  nameProfile.textContent = nameInput.value;
+  aboutProfile.textContent = aboutInput.value;
+  closePopup();
+};
 
 //События в форме места
 const handleCardFormSubmit = (evt) => {
