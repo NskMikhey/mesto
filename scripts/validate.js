@@ -1,6 +1,6 @@
 //
 const ValidationParam = {
-  formSelector: '.popup__container',
+  allForms: document.forms,
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_disabled',
