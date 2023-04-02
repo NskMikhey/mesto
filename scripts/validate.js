@@ -1,17 +1,18 @@
 //
-const enableValidationParam = {
-  formSelector: '.popup__form',
+const ValidationParam = {
+  formSelector: '.popup__container',
   inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  errorSelectorTemplate: '.popup__error_type_',
+  inputErrorClass: 'popup__input_invalid',
   errorClass: 'popup__error_visible'
 };
 
 const log = console.log;
 
-enableValidation(enableValidationParam);
+enableValidation(ValidationParam);
 
 function enableValidation(param) {
-  
+
 }

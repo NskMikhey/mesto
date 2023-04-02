@@ -9,11 +9,11 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  cursor: pointer;
 }
 
 .popup__submit:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
