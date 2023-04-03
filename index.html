@@ -51,24 +51,28 @@
       <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="profileContent" novalidate>
-        <input class="popup__input popup__input_type_name"
-               type="text"
-               placeholder="Ваше имя"
-               name="name"
-               id="name"
-               required
-               minlength="2"
-               maxlength="40">
-        <span class="popup__error popup__error_type_name"></span>
-        <input class="popup__input popup__input_type_about"
-               type="text"
-               placeholder="Вид деятельности"
-               name="about"
-               id="about"
-               required
-               minlength="2"
-               maxlength="200">
-        <span class="popup__error popup__error_type_about"></span>
+        <label class="popup__input-group" for="profile__name">
+          <input class="popup__input popup__input_type_name"
+                type="text"
+                placeholder="Ваше имя"
+                name="name"
+                id="name"
+                required
+                minlength="2"
+                maxlength="40">
+          <span class="popup__error popup__error_type_name"></span>
+        </label>
+        <label class="popup__input-group" for="profile__about"></label>
+          <input class="popup__input popup__input_type_about"
+                type="text"
+                placeholder="Вид деятельности"
+                name="about"
+                id="about"
+                required
+                minlength="2"
+                maxlength="200">
+          <span class="popup__error popup__error_type_about"></span>
+        </label>
         <button class="popup__submit" type="submit" aria-label="Сохранить">Сохранить</button>
       </form>
     </div>
@@ -80,22 +84,26 @@
       <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="newPlaceForm" novalidate>
-        <input class="popup__input popup__input_place_title"
-               type="text"
-               placeholder="Название"
-               name="place-title"
-               id="place-title"
-               required
-               minlength="2"
-               maxlength="30">
-        <span class="popup__error popup__error_type_place-title"></span>
-        <input class="popup__input popup__input_place_description"
-               type="text"
-               placeholder="Ссылка на картинку"
-               name="place-description"
-               id="place-description"
-               required>
-        <span class="popup__error popup__error_type_place-description"></span>
+        <label class="popup__input-group" for="place__name">
+          <input class="popup__input popup__input_place_title"
+                type="text"
+                placeholder="Название"
+                name="place-title"
+                id="place-title"
+                required
+                minlength="2"
+                maxlength="30">
+          <span class="popup__error popup__error_type_place-title"></span>
+        </label>
+        <label class="popup__input-group" for="place__url"></label>
+          <input class="popup__input popup__input_place_description"
+                type="url"
+                placeholder="Ссылка на картинку"
+                name="place-description"
+                id="place-description"
+                required>
+          <span class="popup__error popup__error_type_place-description"></span>
+        </label>
         <button class="popup__submit" type="submit" aria-label="Создать">Создать</button>
       </form>
     </div>
