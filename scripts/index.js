@@ -1,4 +1,4 @@
-const popups = document.querySelectorAll('.popup');
+const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
 const profilePopup = document.querySelector('.edit-profile');
 const editForm = document.forms['profileContent'];
@@ -27,9 +27,16 @@ const exitButtons = document.querySelectorAll('.popup__close-button');
 const cardContainer = document.querySelector('.elements');
 const cardTemplate = document.querySelector('.card-template').content;
 
-//Добавить класс откр попап
+//Ф-я открытия попапа, добавить прослушиватель на ESC
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
+  window.addEventListener('keydown', closePopupClickingOnEscape);
+};
+
+//Ф-я закрытия попапа
+const closePopup = () => {
+  document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
+  window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
 //Открыть попап профиля
@@ -48,13 +55,22 @@ const showAddPopup = () => {
 editButton.addEventListener('click', showProfilePopup);
 addButton.addEventListener('click', showAddPopup);
 
-//Удалить класс откр попап
-const closePopup = () => {
-  document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
-};
+//Закрыть попап на Esc
+const closePopupClickingOnEscape = (evt) => {
+  if (evt.key === 'Escape') closePopup(popups.find((popup) => popup.classList.contains('popup_is-opened')))
+}
+
+//Закрыть попап кликом на оверлей
+const closePopupClickingOnOverlay = (evt) => {
+  if (evt.target !== evt.currentTarget) return;
+  closePopup(evt.currentTarget);
+}
+
+//Слушатель на оверлей
+popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOverlay));
 
 //Слушатель на закрытие
-exitButtons.forEach((exit) => exit.addEventListener('click', closePopup));
+exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
 
 //Создание карточек
 function createCard(data) {
