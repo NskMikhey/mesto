@@ -40,7 +40,7 @@ const checkInputValidity = (formElement, inputElement, spanClass, errorClass, in
   }
 };
 //переключает состояние кнопки отправки формы и управляет ее активностью.
-function toggleButtonState (buttonElement, isActive, inactiveButtonClass) {
+function toggleButtonState(buttonElement, isActive, inactiveButtonClass) {
   if (isActive) {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
@@ -50,7 +50,7 @@ function toggleButtonState (buttonElement, isActive, inactiveButtonClass) {
   }
 };
 //устанавливает обработчики событий для каждого поля формы.
-function setEventListeners (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, spanClass) {
+function setEventListeners(formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, spanClass) {
   const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(buttonElement, formElement.checkValidity(), inactiveButtonClass);
@@ -65,7 +65,7 @@ function setEventListeners (formElement, inputSelector, submitButtonSelector, in
 const resetValidation = (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, spanClass) => {
   const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
-  inputElements.forEach((inputElement) =>{
+  inputElements.forEach((inputElement) => {
     hideInputError(formElement, inputElement, spanClass, errorClass, inputErrorClass);
     toggleButtonState(buttonElement, false, inactiveButtonClass);
   });
