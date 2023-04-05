@@ -39,16 +39,18 @@ const closePopup = () => {
   window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
-//Открыть попап профиля
+//Открыть попап профиля, сбросить ошибки валидатора
 const showProfilePopup = () => {
   nameInput.value = nameProfile.textContent;
   aboutInput.value = aboutProfile.textContent;
   openPopup(profilePopup);
+  resetValidation(editForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
 };
 
-//Открыть попап нового места
+//Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
+  resetValidation(addForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
 };
 
 //Слушатели на открытие форм

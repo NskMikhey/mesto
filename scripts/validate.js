@@ -61,3 +61,13 @@ function setEventListeners (formElement, inputSelector, submitButtonSelector, in
     });
   });
 };
+//сбрасывает ошибки валидации
+const resetValidation = (formElement, inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass, spanClass) => {
+  const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
+  const buttonElement = formElement.querySelector(submitButtonSelector);
+  inputElements.forEach((inputElement) =>{
+    hideInputError(formElement, inputElement, spanClass, errorClass, inputErrorClass);
+    toggleButtonState(buttonElement, false, inactiveButtonClass);
+  });
+};
+

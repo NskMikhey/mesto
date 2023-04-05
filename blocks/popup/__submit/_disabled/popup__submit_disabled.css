@@ -5,6 +5,6 @@
 }
 
 .popup__submit_disabled:hover {
-  cursor: unset;
-  opacity: not-allowed;
+  cursor: not-allowed;
+  opacity: unset;
 }
