@@ -36,6 +36,10 @@ const openPopup = (popup) => {
 //Ф-я закрытия попапа
 const closePopup = () => {
   document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
+  const openedPopup = document.querySelector(".popup_is-opened");
+  if (openedPopup) {
+    openedPopup.classList.remove("popup_is-opened");
+  }
   window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
@@ -50,6 +54,7 @@ const showProfilePopup = () => {
 //Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
+  addForm.reset();
   resetValidation(addForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
 };
 
@@ -59,20 +64,20 @@ addButton.addEventListener('click', showAddPopup);
 
 //Закрыть попап на Esc
 const closePopupClickingOnEscape = (evt) => {
-  if (evt.key === 'Escape') closePopup(popups.find((popup) => popup.classList.contains('popup_is-opened')))
+  if (evt.key === "Escape") closePopup();
 }
 
 //Закрыть попап кликом на оверлей
 const closePopupClickingOnOverlay = (evt) => {
   if (evt.target !== evt.currentTarget) return;
-  closePopup(evt.currentTarget);
+  closePopup();
 }
 
 //Слушатель на оверлей
 popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOverlay));
 
 //Слушатель на закрытие
-exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
+exitButtons.forEach((exit) => exit.addEventListener("click", closePopup));
 
 //Создание карточек
 function createCard(data) {
@@ -80,8 +85,8 @@ function createCard(data) {
   const img = card.querySelector('.card__image');
   const place = card.querySelector('.card__title');
   place.textContent = data.name;
-    img.src = data.link;
-    img.alt = data.name;
+  img.src = data.link;
+  img.alt = data.name;
   const like = card.querySelector('.card__like');
   const trash = card.querySelector('.card__remove');
 
@@ -103,8 +108,8 @@ function createCard(data) {
     evt.target.closest('.card').remove();
   });
 
-    return card;
-  }
+  return card;
+}
 
 initialCards.forEach(elem => {
   cardContainer.append(createCard(elem));
@@ -121,7 +126,7 @@ const handleProfileFormSubmit = (evt) => {
 //События в форме места
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const newPlace = {name: placeTitle.value, link: placePhoto.value};
+  const newPlace = { name: placeTitle.value, link: placePhoto.value };
   cardContainer.prepend(createCard(newPlace));
   evt.target.reset();
   closePopup();
