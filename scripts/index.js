@@ -35,12 +35,11 @@ const openPopup = (popup) => {
 
 //Ф-я закрытия попапа
 const closePopup = () => {
-  document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
   const openedPopup = document.querySelector(".popup_is-opened");
   if (openedPopup) {
     openedPopup.classList.remove("popup_is-opened");
+    window.removeEventListener('keydown', closePopupClickingOnEscape)
   }
-  window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
 //Открыть попап профиля, сбросить ошибки валидатора
