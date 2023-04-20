@@ -25,7 +25,7 @@ const exitButtons = document.querySelectorAll('.popup__close-button');
 
 //массив с карточками
 const cardContainer = document.querySelector('.elements');
-const cardTemplate = document.querySelector('.card-template').content;
+const cardTemplateSelector = '.card-template';
 
 //Ф-я открытия попапа, добавить прослушиватель на ESC
 const openPopup = (popup) => {
@@ -74,59 +74,87 @@ popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOv
 //Слушатель на закрытие
 exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
 
-//Создание карточек
-function createCard(data) {
-  const card = cardTemplate.cloneNode(true);
-  const img = card.querySelector('.card__image');
-  const place = card.querySelector('.card__title');
-  place.textContent = data.name;
-    img.src = data.link;
-    img.alt = data.name;
-  const like = card.querySelector('.card__like');
-  const trash = card.querySelector('.card__remove');
+  //Создание карточек
+  class Card {
+    constructor(data, cardSelector) {
+      this._data = data;
+      this._cardSelector = cardSelector;
+    }
 
-  //Cлушатель на Лайк
-  like.addEventListener('click', () => {
-    like.classList.toggle('card__like_active');
-  });
+    _getTemplate() {
+      const cardElement = document
+        .querySelector(this._cardSelector)
+        .content.querySelector('.card')
+        .cloneNode(true);
 
-  //Cлушатель на зум фото
-  img.addEventListener('click', () => {
-    popupImage.src = data.link;
-    popupImage.alt = data.name;
-    popupTitle.textContent = data.name;
-    openPopup(imagePopup);
-  });
+      return cardElement;
 
-  //Cлушатель на корзину
-  trash.addEventListener('click', (evt) => {
-    evt.target.closest('.card').remove();
-  });
+    }
 
-    return card;
+    _setEventListeners() {
+      this._element.querySelector('.card__like').addEventListener('click', () => {
+        this._handleLikeIcon();
+      });
+
+      this._element.querySelector('.card__remove').addEventListener('click', () => {
+        this._handleDeleteIcon();
+      });
+
+      this._element.querySelector('.card__image').addEventListener('click', () => {
+        this._handleCardClick();
+      });
+    }
+
+    _handleLikeIcon() {
+      this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    }
+
+    _handleDeleteIcon() {
+      this._element.remove();
+    }
+
+    _handleCardClick() {
+      const popupImage = document.querySelector('.popup__image');
+      const popupTitle = document.querySelector('.popup__image-title');
+      popupImage.src = this._data.link;
+      popupImage.alt = this._data.name;
+      popupTitle.textContent = this._data.name;
+      openPopup(imagePopup);
+    }
+
+    createCard() {
+      this._element = this._getTemplate();
+      this._setEventListeners();
+      this._element.querySelector('.card__title').textContent = this._data.name;
+      this._element.querySelector('.card__image').src = this._data.link;
+      this._element.querySelector('.card__image').alt = this._data.name;
+      return this._element;
+    }
   }
+  //Поле с карточками
+  initialCards.forEach((item) => {
+    const card = new Card(item, cardTemplateSelector).createCard();
+    cardContainer.appendChild(card);
+  });
 
-initialCards.forEach(elem => {
-  cardContainer.append(createCard(elem));
-});
 
-//События в форме профиля
-const handleProfileFormSubmit = (evt) => {
-  evt.preventDefault();
-  nameProfile.textContent = nameInput.value;
-  aboutProfile.textContent = aboutInput.value;
-  closePopup();
-};
+  //События в форме профиля
+  const handleProfileFormSubmit = (evt) => {
+    evt.preventDefault();
+    nameProfile.textContent = nameInput.value;
+    aboutProfile.textContent = aboutInput.value;
+    closePopup();
+  };
 
-//События в форме места
-const handleCardFormSubmit = (evt) => {
-  evt.preventDefault();
-  const newPlace = {name: placeTitle.value, link: placePhoto.value};
-  cardContainer.prepend(createCard(newPlace));
-  evt.target.reset();
-  closePopup();
-};
+  //События в форме места
+  const handleCardFormSubmit = (evt) => {
+    evt.preventDefault();
+    const newPlace = { name: placeTitle.value, link: placePhoto.value };
+    cardContainer.prepend(new Card(newPlace, cardTemplateSelector).createCard());
+    evt.target.reset();
+    closePopup();
+  };
 
-//Слушатели на события в формах
-editForm.addEventListener('submit', handleProfileFormSubmit);
-addForm.addEventListener('submit', handleCardFormSubmit);
+  //Слушатели на события в формах
+  editForm.addEventListener('submit', handleProfileFormSubmit);
+  addForm.addEventListener('submit', handleCardFormSubmit);
