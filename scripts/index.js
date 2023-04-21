@@ -44,14 +44,16 @@ const showProfilePopup = () => {
   nameInput.value = nameProfile.textContent;
   aboutInput.value = aboutProfile.textContent;
   openPopup(profilePopup);
-  resetValidation(editForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
+  const editFormValidator = new FormValidator(validationParam, editForm);
+  editFormValidator.resetValidation();
 };
 
 //Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
   addForm.reset();
-  resetValidation(addForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
+  const addFormValidator = new FormValidator(validationParam, addForm);
+  addFormValidator.resetValidation();
 };
 
 //Слушатели на открытие форм
