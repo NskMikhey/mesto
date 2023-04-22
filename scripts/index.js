@@ -26,7 +26,7 @@ const exitButtons = document.querySelectorAll('.popup__close-button');
 
 //массив с карточками
 const cardContainer = document.querySelector('.elements');
-const cardTemplateSelector = '.card-template';
+const cardSelector = '.card-template';
 
 //Ф-я открытия попапа, добавить прослушиватель на ESC
 const openPopup = (popup) => {
@@ -55,6 +55,13 @@ const showAddPopup = () => {
   addForm.reset();
   //const addFormValidator = new FormValidator(validationParam, addForm);
   //addFormValidator.resetValidation();
+};
+
+const openImagePopup = (data) => {
+  popupImage.src = data.link;
+  popupImage.alt = data.name;
+  popupTitle.textContent = data.name;
+  openPopup(imagePopup);
 };
 
 //Слушатели на открытие форм
@@ -118,12 +125,7 @@ class Card {
   }
 
   _handleCardClick() {
-    const popupImage = document.querySelector('.popup__image');
-    const popupTitle = document.querySelector('.popup__image-title');
-    popupImage.src = this._data.link;
-    popupImage.alt = this._data.name;
-    popupTitle.textContent = this._data.name;
-    openPopup(imagePopup);
+    openImagePopup(this._data);
   }
 
   createCard() {
@@ -137,7 +139,7 @@ class Card {
 }
 //Поле с карточками
 initialCards.forEach((item) => {
-  const card = new Card(item, cardTemplateSelector).createCard();
+  const card = new Card(item, cardSelector).createCard();
   cardContainer.appendChild(card);
 });
 
@@ -154,7 +156,7 @@ const handleProfileFormSubmit = (evt) => {
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
   const newPlace = { name: placeTitle.value, link: placePhoto.value };
-  cardContainer.prepend(new Card(newPlace, cardTemplateSelector).createCard());
+  cardContainer.prepend(new Card(newPlace, cardSelector).createCard());
   evt.target.reset();
   closePopup();
 };
