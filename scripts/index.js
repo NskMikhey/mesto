@@ -1,4 +1,5 @@
 import initialCards from "./components.js";
+import Card from "./Card.js";
 const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
 const profilePopup = document.querySelector('.edit-profile');
@@ -85,63 +86,19 @@ popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOv
 //Слушатель на закрытие
 exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
 
-//Создание карточек
-class Card {
-  constructor(data, cardSelector) {
-    this._data = data;
-    this._cardSelector = cardSelector;
-  }
-
-  _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector('.card')
-      .cloneNode(true);
-
-    return cardElement;
-
-  }
-
-  _setEventListeners() {
-    this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._handleLikeIcon();
-    });
-
-    this._element.querySelector('.card__remove').addEventListener('click', () => {
-      this._handleDeleteIcon();
-    });
-
-    this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleCardClick();
-    });
-  }
-
-  _handleLikeIcon() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
-  }
-
-  _handleDeleteIcon() {
-    this._element.remove();
-  }
-
-  _handleCardClick() {
-    openImagePopup(this._data);
-  }
-
-  createCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.card__title').textContent = this._data.name;
-    this._element.querySelector('.card__image').src = this._data.link;
-    this._element.querySelector('.card__image').alt = this._data.name;
-    return this._element;
-  }
-}
 //Поле с карточками
-initialCards.forEach((item) => {
-  const card = new Card(item, cardSelector).createCard();
-  cardContainer.appendChild(card);
-});
+const createNewCard = (element) => {
+  const article = new Card(element, cardSelector, openImagePopup)
+  const articleElement = article.createCard()
+  return articleElement
+}
+
+const addCard = (element) => {
+  const article = createNewCard(element)
+  cardContainer.prepend(article);
+}
+//создание карточек при загрузке страницы
+initialCards.forEach(addCard)
 
 
 //События в форме профиля
@@ -156,7 +113,7 @@ const handleProfileFormSubmit = (evt) => {
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
   const newPlace = { name: placeTitle.value, link: placePhoto.value };
-  cardContainer.prepend(new Card(newPlace, cardSelector).createCard());
+  addCard(newPlace);
   evt.target.reset();
   closePopup();
 };
