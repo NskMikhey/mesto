@@ -1,3 +1,4 @@
+import initialCards from "./components.js";
 const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
 const profilePopup = document.querySelector('.edit-profile');
@@ -44,16 +45,16 @@ const showProfilePopup = () => {
   nameInput.value = nameProfile.textContent;
   aboutInput.value = aboutProfile.textContent;
   openPopup(profilePopup);
-  const editFormValidator = new FormValidator(validationParam, editForm);
-  editFormValidator.resetValidation();
+  //const editFormValidator = new FormValidator(validationParam, editForm);
+  //editFormValidator.resetValidation();
 };
 
 //Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
   addForm.reset();
-  const addFormValidator = new FormValidator(validationParam, addForm);
-  addFormValidator.resetValidation();
+  //const addFormValidator = new FormValidator(validationParam, addForm);
+  //addFormValidator.resetValidation();
 };
 
 //Слушатели на открытие форм
