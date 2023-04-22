@@ -15,7 +15,7 @@ export default class Card {
 
   }
 
-  //содержит приватные методы, которые работают с разметкой, устанавливают слушателей событий
+  //приватные методы, которые работают с разметкой, устанавливают слушателей событий
   _setEventListeners() {
     this._element.querySelector('.card__like').addEventListener('click', () => {
       this._handleLikeIcon();
@@ -30,7 +30,7 @@ export default class Card {
     });
   }
 
-  //содержит приватные методы для каждого обработчика
+  //приватные методы для каждого обработчика
   _handleLikeIcon() {
     this._element.querySelector('.card__like').classList.toggle('card__like_active');
   }
@@ -42,7 +42,7 @@ export default class Card {
   _handleCardClick() {
     this._openImagePopup(this._data);
   }
-  //Создание карточек
+  //метод, который возвращает полностью работоспособный и наполненный данными элемент карточки
   createCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
