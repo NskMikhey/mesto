@@ -51,4 +51,5 @@ export default class Card {
     this._element.querySelector('.card__image').alt = this._data.name;
     return this._element;
   }
-}
+};
+
