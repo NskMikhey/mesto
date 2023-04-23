@@ -40,11 +40,8 @@ const openPopup = (popup) => {
 
 //Ф-я закрытия попапа
 const closePopup = () => {
-  const openedPopup = document.querySelector(".popup_is-opened");
-  if (openedPopup) {
-    openedPopup.classList.remove("popup_is-opened");
-    window.removeEventListener('keydown', closePopupClickingOnEscape)
-  }
+  document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
+  window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
 //включение валидации форм
@@ -72,7 +69,16 @@ const showProfilePopup = () => {
 //Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
-  resetValidation(addForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
+  addForm.reset();
+  addFormValidator.resetValidation();
+};
+
+//Открыть зум-попап картинки
+const openImagePopup = (data) => {
+  popupImage.src = data.link;
+  popupImage.alt = data.name;
+  popupTitle.textContent = data.name;
+  openPopup(imagePopup);
 };
 
 //Слушатели на открытие форм
@@ -95,56 +101,20 @@ initialCards.forEach(addCard);
 
 //Закрыть попап на Esc
 const closePopupClickingOnEscape = (evt) => {
-  if (evt.key === "Escape") closePopup();
+  if (evt.key === 'Escape') closePopup(popups.find((popup) => popup.classList.contains('popup_is-opened')))
 }
 
 //Закрыть попап кликом на оверлей
 const closePopupClickingOnOverlay = (evt) => {
   if (evt.target !== evt.currentTarget) return;
-  closePopup();
+  closePopup(evt.currentTarget);
 }
 
 //Слушатель на оверлей
 popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOverlay));
 
-//Слушатель на закрытие
+//Слушатель на закрытие попапа
 exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
-
-//Создание карточек
-function createCard(data) {
-  const card = cardTemplate.cloneNode(true);
-  const img = card.querySelector('.card__image');
-  const place = card.querySelector('.card__title');
-  place.textContent = data.name;
-    img.src = data.link;
-    img.alt = data.name;
-  const like = card.querySelector('.card__like');
-  const trash = card.querySelector('.card__remove');
-
-  //Cлушатель на Лайк
-  like.addEventListener('click', () => {
-    like.classList.toggle('card__like_active');
-  });
-
-  //Cлушатель на зум фото
-  img.addEventListener('click', () => {
-    popupImage.src = data.link;
-    popupImage.alt = data.name;
-    popupTitle.textContent = data.name;
-    openPopup(imagePopup);
-  });
-
-  //Cлушатель на корзину
-  trash.addEventListener('click', (evt) => {
-    evt.target.closest('.card').remove();
-  });
-
-    return card;
-  }
-
-initialCards.forEach(elem => {
-  cardContainer.append(createCard(elem));
-});
 
 //События в форме профиля
 const handleProfileFormSubmit = (evt) => {
@@ -157,8 +127,8 @@ const handleProfileFormSubmit = (evt) => {
 //События в форме места
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const newPlace = {name: placeTitle.value, link: placePhoto.value};
-  cardContainer.prepend(createCard(newPlace));
+  const newPlace = { name: placeTitle.value, link: placePhoto.value };
+  addCard(newPlace);
   evt.target.reset();
   closePopup();
 };
