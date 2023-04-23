@@ -1,3 +1,8 @@
+import initialCards from "./constants.js";
+import Card from "./Card.js";
+import validationParam from "./validate.js";
+import FormValidator from "./FormValidator.js";
+
 const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
 const profilePopup = document.querySelector('.edit-profile');
@@ -25,7 +30,7 @@ const exitButtons = document.querySelectorAll('.popup__close-button');
 
 //массив с карточками
 const cardContainer = document.querySelector('.elements');
-const cardTemplate = document.querySelector('.card-template').content;
+const cardSelector = '.card-template';
 
 //Ф-я открытия попапа, добавить прослушиватель на ESC
 const openPopup = (popup) => {
@@ -42,24 +47,51 @@ const closePopup = () => {
   }
 };
 
+//включение валидации форм
+const enableValidation = (config) => {
+  const formElements = Array.from(document.querySelectorAll(validationParam.formSelector));
+  formElements.forEach((formElement) => {
+    const formValidator = new FormValidator(config, formElement);
+    formValidator.enableValidation();
+  });
+};
+//создать экземпляр класса валидатора,
+const editFormValidator = new FormValidator(validationParam, editForm);
+const addFormValidator = new FormValidator(validationParam, addForm);
+
+enableValidation(validationParam);
+
 //Открыть попап профиля, сбросить ошибки валидатора
 const showProfilePopup = () => {
   nameInput.value = nameProfile.textContent;
   aboutInput.value = aboutProfile.textContent;
   openPopup(profilePopup);
-  resetValidation(editForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
+  editFormValidator.resetValidation();
 };
 
 //Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
-  addForm.reset();
   resetValidation(addForm, validationParam.inputSelector, validationParam.submitButtonSelector, validationParam.inactiveButtonClass, validationParam.inputErrorClass, validationParam.errorClass, validationParam.spanClass);
 };
 
 //Слушатели на открытие форм
 editButton.addEventListener('click', showProfilePopup);
 addButton.addEventListener('click', showAddPopup);
+
+//Поле с карточками
+const createNewCard = (element) => {
+  const article = new Card(element, cardSelector, openImagePopup);
+  const articleElement = article.createCard();
+  return articleElement;
+}
+
+const addCard = (element) => {
+  const article = createNewCard(element)
+  cardContainer.prepend(article);
+}
+//создание карточек при загрузке страницы
+initialCards.forEach(addCard);
 
 //Закрыть попап на Esc
 const closePopupClickingOnEscape = (evt) => {
@@ -76,7 +108,7 @@ const closePopupClickingOnOverlay = (evt) => {
 popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOverlay));
 
 //Слушатель на закрытие
-exitButtons.forEach((exit) => exit.addEventListener("click", closePopup));
+exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
 
 //Создание карточек
 function createCard(data) {
@@ -84,8 +116,8 @@ function createCard(data) {
   const img = card.querySelector('.card__image');
   const place = card.querySelector('.card__title');
   place.textContent = data.name;
-  img.src = data.link;
-  img.alt = data.name;
+    img.src = data.link;
+    img.alt = data.name;
   const like = card.querySelector('.card__like');
   const trash = card.querySelector('.card__remove');
 
@@ -107,8 +139,8 @@ function createCard(data) {
     evt.target.closest('.card').remove();
   });
 
-  return card;
-}
+    return card;
+  }
 
 initialCards.forEach(elem => {
   cardContainer.append(createCard(elem));
@@ -125,7 +157,7 @@ const handleProfileFormSubmit = (evt) => {
 //События в форме места
 const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
-  const newPlace = { name: placeTitle.value, link: placePhoto.value };
+  const newPlace = {name: placeTitle.value, link: placePhoto.value};
   cardContainer.prepend(createCard(newPlace));
   evt.target.reset();
   closePopup();
@@ -134,3 +166,4 @@ const handleCardFormSubmit = (evt) => {
 //Слушатели на события в формах
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleCardFormSubmit);
+
