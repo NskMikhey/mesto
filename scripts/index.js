@@ -1,5 +1,8 @@
-import initialCards from "./components.js";
+import initialCards from "./constants.js";
 import Card from "./Card.js";
+import validationParam from "./validate.js";
+import FormValidator from "./FormValidator.js";
+
 const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
 const profilePopup = document.querySelector('.edit-profile');
@@ -41,23 +44,36 @@ const closePopup = () => {
   window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
+//включение валидации форм
+const enableValidation = (config) => {
+  const formElements = Array.from(document.querySelectorAll(validationParam.formSelector));
+  formElements.forEach((formElement) => {
+    const formValidator = new FormValidator(config, formElement);
+    formValidator.enableValidation();
+  });
+};
+//создать экземпляр класса валидатора,
+const editFormValidator = new FormValidator(validationParam, editForm);
+const addFormValidator = new FormValidator(validationParam, addForm);
+
+enableValidation(validationParam);
+
 //Открыть попап профиля, сбросить ошибки валидатора
 const showProfilePopup = () => {
   nameInput.value = nameProfile.textContent;
   aboutInput.value = aboutProfile.textContent;
   openPopup(profilePopup);
-  //const editFormValidator = new FormValidator(validationParam, editForm);
-  //editFormValidator.resetValidation();
+  editFormValidator.resetValidation();
 };
 
 //Открыть попап нового места, сбросить ошибки валидатора
 const showAddPopup = () => {
   openPopup(cardPopup);
   addForm.reset();
-  //const addFormValidator = new FormValidator(validationParam, addForm);
-  //addFormValidator.resetValidation();
+  addFormValidator.resetValidation();
 };
 
+//Открыть зум-попап картинки
 const openImagePopup = (data) => {
   popupImage.src = data.link;
   popupImage.alt = data.name;
@@ -68,6 +84,20 @@ const openImagePopup = (data) => {
 //Слушатели на открытие форм
 editButton.addEventListener('click', showProfilePopup);
 addButton.addEventListener('click', showAddPopup);
+
+//Поле с карточками
+const createNewCard = (element) => {
+  const article = new Card(element, cardSelector, openImagePopup);
+  const articleElement = article.createCard();
+  return articleElement;
+}
+
+const addCard = (element) => {
+  const article = createNewCard(element)
+  cardContainer.prepend(article);
+}
+//создание карточек при загрузке страницы
+initialCards.forEach(addCard);
 
 //Закрыть попап на Esc
 const closePopupClickingOnEscape = (evt) => {
@@ -83,23 +113,8 @@ const closePopupClickingOnOverlay = (evt) => {
 //Слушатель на оверлей
 popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOverlay));
 
-//Слушатель на закрытие
+//Слушатель на закрытие попапа
 exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
-
-//Поле с карточками
-const createNewCard = (element) => {
-  const article = new Card(element, cardSelector, openImagePopup)
-  const articleElement = article.createCard()
-  return articleElement
-}
-
-const addCard = (element) => {
-  const article = createNewCard(element)
-  cardContainer.prepend(article);
-}
-//создание карточек при загрузке страницы
-initialCards.forEach(addCard)
-
 
 //События в форме профиля
 const handleProfileFormSubmit = (evt) => {
@@ -121,3 +136,4 @@ const handleCardFormSubmit = (evt) => {
 //Слушатели на события в формах
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleCardFormSubmit);
+
