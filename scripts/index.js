@@ -166,4 +166,3 @@ const handleCardFormSubmit = (evt) => {
 //Слушатели на события в формах
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleCardFormSubmit);
-
