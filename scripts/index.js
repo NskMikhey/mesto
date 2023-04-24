@@ -44,7 +44,7 @@ const closePopup = () => {
   window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
-//создать экземпляр класса валидатора,
+//создать экземпляр класса валидатора, включить валидацию формы.
 const editFormValidator = new FormValidator(validationParam, editForm);
 editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(validationParam, addForm);
