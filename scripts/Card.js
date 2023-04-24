@@ -10,22 +10,34 @@ export default class Card {
       .querySelector(this._cardSelector)
       .content.querySelector('.card')
       .cloneNode(true);
-
     return cardElement;
+  }
 
+  //метод, который возвращает полностью работоспособный и наполненный данными элемент карточки
+  createCard() {
+    this._element = this._getTemplate();
+    this._likeButton = this._element.querySelector('.card__like');
+    this._cardImage = this._element.querySelector('.card__image');
+    this._removeButton = this._element.querySelector('.card__remove');
+    this._cardTitle = this._element.querySelector('.card__title');
+    this._setEventListeners();
+    this._cardTitle.textContent = this._data.name;
+    this._cardImage.src = this._data.link;
+    this._cardImage.alt = this._data.name;
+    return this._element;
   }
 
   //приватные методы, которые работают с разметкой, устанавливают слушателей событий
   _setEventListeners() {
-    this._element.querySelector('.card__like').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeIcon();
     });
 
-    this._element.querySelector('.card__remove').addEventListener('click', () => {
+    this._removeButton.addEventListener('click', () => {
       this._handleDeleteIcon();
     });
 
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick();
     });
   }
@@ -37,19 +49,10 @@ export default class Card {
 
   _handleDeleteIcon() {
     this._element.remove();
+    this._element = null;
   }
 
   _handleCardClick() {
     this._openImagePopup(this._data);
   }
-  //метод, который возвращает полностью работоспособный и наполненный данными элемент карточки
-  createCard() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-    this._element.querySelector('.card__title').textContent = this._data.name;
-    this._element.querySelector('.card__image').src = this._data.link;
-    this._element.querySelector('.card__image').alt = this._data.name;
-    return this._element;
-  }
 };
-
