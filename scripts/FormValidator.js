@@ -8,6 +8,8 @@ class FormValidator {
     this._errorClass = config.errorClass;
     this._spanClass = config.spanClass;
     this._form = form;
+    this._inputElements = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._form.querySelector(this._submitButtonSelector);
   }
 
   //показывает сообщение об ошибке у конкретного поля и добавляет классы стилей.
@@ -36,25 +38,23 @@ class FormValidator {
   }
 
   //переключает состояние кнопки отправки формы и управляет ее активностью.
-  _toggleButtonState(buttonElement, isActive) {
+  _toggleButtonState(isActive) {
     if (isActive) {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.disabled = false;
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.disabled = false;
     } else {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.disabled = true;
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.disabled = true;
     }
   }
 
   //устанавливает обработчики событий для каждого поля формы.
   _setEventListeners() {
-    const inputElements = Array.from(this._form.querySelectorAll(this._inputSelector));
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(buttonElement, this._form.checkValidity());
-    inputElements.forEach((inputElement) => {
+    this._toggleButtonState(this._form.checkValidity());
+    this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(buttonElement, this._form.checkValidity());
+        this._toggleButtonState(this._form.checkValidity());
       });
     });
   }
@@ -69,11 +69,9 @@ class FormValidator {
 
   //публичный метод который выключает валидацию формы
   resetValidation() {
-    const inputElements = Array.from(this._form.querySelectorAll(this._inputSelector));
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
-    inputElements.forEach((inputElement) => {
+    this._inputElements.forEach((inputElement) => {
       this._hideInputError(inputElement);
-      this._toggleButtonState(buttonElement, false);
+      this._toggleButtonState(false);
     });
   }
 }
