@@ -44,19 +44,11 @@ const closePopup = () => {
   window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
 
-//включение валидации форм
-const enableValidation = (config) => {
-  const formElements = Array.from(document.querySelectorAll(validationParam.formSelector));
-  formElements.forEach((formElement) => {
-    const formValidator = new FormValidator(config, formElement);
-    formValidator.enableValidation();
-  });
-};
 //создать экземпляр класса валидатора,
 const editFormValidator = new FormValidator(validationParam, editForm);
+editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(validationParam, addForm);
-
-enableValidation(validationParam);
+addFormValidator.enableValidation();
 
 //Открыть попап профиля, сбросить ошибки валидатора
 const showProfilePopup = () => {
@@ -111,7 +103,7 @@ const closePopupClickingOnOverlay = (evt) => {
 }
 
 //Слушатель на оверлей
-popups.forEach((popup) => popup.addEventListener('click', closePopupClickingOnOverlay));
+popups.forEach((popup) => popup.addEventListener('mousedown', closePopupClickingOnOverlay));
 
 //Слушатель на закрытие попапа
 exitButtons.forEach((exit) => exit.addEventListener('click', () => closePopup(exit.closest('.popup'))));
