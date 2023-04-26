@@ -44,7 +44,7 @@ export default class Card {
 
   //приватные методы для каждого обработчика
   _handleLikeIcon() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+    this._likeButton.classList.toggle('card__like_active');
   }
 
   _handleDeleteIcon() {
