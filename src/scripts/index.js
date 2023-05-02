@@ -1,10 +1,58 @@
 import {
+  validationParam,
   initialCards,
-  validationParam
+  cardSelector,
+  cardContainer,
+  profileInfoEditor,
+  cardCreator,
+  buttonOpenAddCardPopup,
+  buttonOpenEditProfilePopup
 } from "./utils/constants.js";
 import Card from "./components/Card.js";
 import FormValidator from "./components/FormValidator.js";
+import PopupWithForm from "./components/PopupWithForm.js";
+import PopupWithImage from "./components/PopupWithImage.js";
+import Section from "./components/Section.js";
+import UserInfo from "./components/UserInfo.js";
 
+
+
+/*
+//создать экземпляр класса валидатора, включить валидацию формы.
+const editFormValidator = new FormValidator(validationParam, editForm);
+editFormValidator.enableValidation();
+const addFormValidator = new FormValidator(validationParam, addForm);
+addFormValidator.enableValidation();
+*/
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  infoSelector: ".profile__about"
+});
+
+const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
+imagePopup.setEventListeners();
+
+//Открыть зум-попап картинки
+const openImagePopup = (name, link) => {
+  imagePopup.open(name, link)
+};
+
+//Поле с карточками
+const createNewCard = (element) => {
+  const article = new Card(element, cardSelector, openImagePopup);
+  const articleElement = article.createCard();
+  return articleElement;
+}
+
+const addCard = (element) => {
+  const article = createNewCard(element)
+  cardContainer.prepend(article);
+}
+
+//создание карточек при загрузке страницы
+initialCards.forEach(addCard);
+
+/*
 const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
 const profilePopup = document.querySelector('.edit-profile');
@@ -30,10 +78,6 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const exitButtons = document.querySelectorAll('.popup__close-button');
 
-//массив с карточками
-const cardContainer = document.querySelector('.elements');
-const cardSelector = '.card-template';
-
 //Ф-я открытия попапа, добавить прослушиватель на ESC
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
@@ -45,13 +89,9 @@ const closePopup = () => {
   document.querySelector('.popup_is-opened').classList.remove('popup_is-opened');
   window.removeEventListener('keydown', closePopupClickingOnEscape)
 };
+*/
 
-//создать экземпляр класса валидатора, включить валидацию формы.
-const editFormValidator = new FormValidator(validationParam, editForm);
-editFormValidator.enableValidation();
-const addFormValidator = new FormValidator(validationParam, addForm);
-addFormValidator.enableValidation();
-
+/*
 //Открыть попап профиля, сбросить ошибки валидатора
 const showProfilePopup = () => {
   nameInput.value = nameProfile.textContent;
@@ -66,33 +106,15 @@ const showAddPopup = () => {
   addForm.reset();
   addFormValidator.resetValidation();
 };
+*/
 
-//Открыть зум-попап картинки
-const openImagePopup = (data) => {
-  popupImage.src = data.link;
-  popupImage.alt = data.name;
-  popupTitle.textContent = data.name;
-  openPopup(imagePopup);
-};
-
+/*
 //Слушатели на открытие форм
 editButton.addEventListener('click', showProfilePopup);
 addButton.addEventListener('click', showAddPopup);
+*/
 
-//Поле с карточками
-const createNewCard = (element) => {
-  const article = new Card(element, cardSelector, openImagePopup);
-  const articleElement = article.createCard();
-  return articleElement;
-}
-
-const addCard = (element) => {
-  const article = createNewCard(element)
-  cardContainer.prepend(article);
-}
-//создание карточек при загрузке страницы
-initialCards.forEach(addCard);
-
+/*
 //Закрыть попап на Esc
 const closePopupClickingOnEscape = (evt) => {
   if (evt.key === 'Escape') closePopup(popups.find((popup) => popup.classList.contains('popup_is-opened')))
@@ -130,3 +152,4 @@ const handleCardFormSubmit = (evt) => {
 //Слушатели на события в формах
 editForm.addEventListener('submit', handleProfileFormSubmit);
 addForm.addEventListener('submit', handleCardFormSubmit);
+*/
