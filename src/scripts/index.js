@@ -1,7 +1,9 @@
-import initialCards from "./constants.js";
-import Card from "./Card.js";
-import validationParam from "./validate.js";
-import FormValidator from "./FormValidator.js";
+import {
+  initialCards,
+  validationParam
+} from "./utils/constants.js";
+import Card from "./components/Card.js";
+import FormValidator from "./components/FormValidator.js";
 
 const popups = Array.from(document.querySelectorAll('.popup'));
 //Объявил Профиль попап
