@@ -33,12 +33,6 @@ const enableValidation = (config) => {
 
 enableValidation(validationParam);
 
-//Экземпляр профиля пользователя
-const userInfo = new UserInfo({
-  nameSelector: ".profile__name",
-  infoSelector: ".profile__about"
-});
-
 //Экземпляр картинки
 const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
 imagePopup.setEventListeners();
@@ -79,7 +73,7 @@ const handleCardFormSubmit = ({ 'place-title': name, 'place-description': link }
 }
 
 const cardPopup = new PopupWithForm(document.querySelector('.new-place'), handleCardFormSubmit);
-cardPopup.setEventListeners()
+cardPopup.setEventListeners();
 
 
 //Форма редактирования профиля
@@ -89,18 +83,23 @@ const handleProfileFormSubmit = (data) => {
 }
 
 const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'), handleProfileFormSubmit);
-profilePopup.setEventListeners()
+profilePopup.setEventListeners();
 
-//Слушатель на профиль
-buttonOpenEditProfilePopup.addEventListener('click', () => {
-  const data = userInfo.getUserInfo()
-  profilePopup.setInputValues(data)
-  formValidators[addForm.name].resetValidation()
-  profilePopup.open()
-})
+//Экземпляр профиля пользователя
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  aboutSelector: ".profile__about"
+});
 
 //Слушатель на добавление карточки
 buttonOpenAddCardPopup.addEventListener('click', () => {
   formValidators[cardCreator.name].resetValidation()
   cardPopup.open()
+})
+
+//Слушатель на профиль
+buttonOpenEditProfilePopup.addEventListener('click', () => {
+  profilePopup.setInputValues(userInfo.getUserInfo())
+  formValidators[addForm.name].resetValidation()
+  profilePopup.open()
 })

@@ -18,6 +18,14 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  //метод, который отправляет данные полей на страницу
+  setInputValues(data) {
+    this._inputList.forEach(input => {
+      input.value = data[input.name];
+    })
+  }
+
+
   //перезаписанный метод setEventListeners, который добавляет обработчик клика иконке закрытия, и добавляет обработчик сабмита формы.
   setEventListeners() {
     super.setEventListeners();
