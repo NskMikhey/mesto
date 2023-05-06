@@ -6,7 +6,7 @@ export default class PopupWithForm extends Popup {
     this._submitFormCallback = submitFormCallback;
     this._form = this._popupSelector.querySelector('.popup__form');
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
-    this._submitButton = this._form.querySelector('.popup__submit-button');
+    this._submitButton = this._form.querySelector('.popup__submit');
   }
 
   //приватный метод, который собирает данные всех полей формы.
@@ -33,12 +33,3 @@ export default class PopupWithForm extends Popup {
     super.close();
   }
 }
-
-/*const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'), handleProfileFormSubmit);
-const cardPopup = new PopupWithForm(document.querySelector('.new-place'), handleCardFormSubmit);
-const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
-
-profilePopup.setEventListeners();
-cardPopup.setEventListeners();
-imagePopup.setEventListeners();
-*/

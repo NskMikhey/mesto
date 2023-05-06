@@ -25,9 +25,11 @@ const initialCards = [
   },
 ];
 
-const profileInfoEditor = document.forms['profileContent'];
+const addForm = document.forms['profileContent'];
 const cardCreator = document.forms['newPlaceForm'];
+//Кнопка редактирования профиля
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
+//Кнопка открытия попапа карточек
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button');
 //массив с карточками
 const cardContainer = document.querySelector('.elements');
@@ -47,7 +49,7 @@ const validationParam = {
 export {
   validationParam,
   initialCards,
-  profileInfoEditor,
+  addForm,
   cardCreator,
   buttonOpenAddCardPopup,
   buttonOpenEditProfilePopup,

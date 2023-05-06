@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
   }
 
   //перезаписанный метод open, который вставляет в попап картинку с src изображения и подписью к картинке.
-  open(data) {
+  open = (data) => {
     this._popupImage.src = data.link;
     this._popupImage.alt = data.name;
     this._popupTitle.textContent = data.name;
