@@ -34,6 +34,7 @@ const buttonOpenAddCardPopup = document.querySelector('.profile__add-button');
 //массив с карточками
 const cardContainer = document.querySelector('.elements');
 const cardSelector = '.card-template';
+const cardContainerSelector = '.elements';
 
 // объект с настройками валидалии
 const validationParam = {
@@ -55,4 +56,5 @@ export {
   buttonOpenEditProfilePopup,
   cardContainer,
   cardSelector,
+  cardContainerSelector
 }

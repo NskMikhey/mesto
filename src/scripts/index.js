@@ -6,7 +6,8 @@ import {
   addForm,
   cardCreator,
   buttonOpenAddCardPopup,
-  buttonOpenEditProfilePopup
+  buttonOpenEditProfilePopup,
+  cardContainerSelector
 } from "./utils/constants.js";
 import Card from "./components/Card.js";
 import FormValidator from "./components/FormValidator.js";
@@ -37,14 +38,9 @@ enableValidation(validationParam);
 const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
 imagePopup.setEventListeners();
 
-//Открыть зум-попап картинки
-const openImagePopup = (name, link) => {
-  imagePopup.open(name, link)
-};
-
 //Поле с карточками
 const createNewCard = (element) => {
-  const article = new Card(element, cardSelector, openImagePopup);
+  const article = new Card(element, cardSelector, imagePopup.open);
   const articleElement = article.createCard();
   return articleElement;
 }
@@ -55,13 +51,11 @@ const addCard = (element) => {
 }
 
 //создание карточек при загрузке страницы
-const initialCardList = new Section(
-  {
+const initialCardList = new Section({
     items: initialCards,
     renderer: addCard,
   },
-  '.elements',
-);
+  cardContainerSelector);
 
 initialCardList.renderItems();
 
