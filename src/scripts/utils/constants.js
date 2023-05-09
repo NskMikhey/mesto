@@ -25,14 +25,13 @@ const initialCards = [
   },
 ];
 
-const addForm = document.forms['profileContent'];
+const editForm = document.forms['profileContent'];
 const cardCreator = document.forms['newPlaceForm'];
 //Кнопка редактирования профиля
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
 //Кнопка открытия попапа карточек
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button');
 //массив с карточками
-const cardContainer = document.querySelector('.elements');
 const cardSelector = '.card-template';
 const cardContainerSelector = '.elements';
 
@@ -50,11 +49,10 @@ const validationParam = {
 export {
   validationParam,
   initialCards,
-  addForm,
+  editForm,
   cardCreator,
   buttonOpenAddCardPopup,
   buttonOpenEditProfilePopup,
-  cardContainer,
   cardSelector,
   cardContainerSelector
 }

@@ -8,12 +8,11 @@ export default class Section {
   //метод, который отвечает за отрисовку всех элементов из масива
   renderItems() {
     this._items.forEach((item) => {
-      this._renderer(item);
-    });
+      this.addItem(item)});
   }
 
   //метод, который принимает DOM-элемент и добавляет его в контейнер
-  addItem(element) {
-    this._containerSelector.prepend(element);
+  addItem(data) {
+    this._containerSelector.prepend(this._renderer(data));
   }
 }

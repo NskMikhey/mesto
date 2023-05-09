@@ -2,19 +2,18 @@ import {
   validationParam,
   initialCards,
   cardSelector,
-  cardContainer,
-  addForm,
+  editForm,
   cardCreator,
   buttonOpenAddCardPopup,
   buttonOpenEditProfilePopup,
   cardContainerSelector
-} from "./utils/constants.js";
-import Card from "./components/Card.js";
-import FormValidator from "./components/FormValidator.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import Section from "./components/Section.js";
-import UserInfo from "./components/UserInfo.js";
+} from "../scripts/utils/constants.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import Section from "../scripts/components/Section.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 
 //Создать экземпляр класса валидатора, включить валидацию формы.
 const formValidators = {}
@@ -34,56 +33,34 @@ const enableValidation = (config) => {
 
 enableValidation(validationParam);
 
-//Экземпляр картинки
-const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
-imagePopup.setEventListeners();
-
-//Поле с карточками
-const createNewCard = (element) => {
-  const article = new Card(element, cardSelector, imagePopup.open);
-  const articleElement = article.createCard();
-  return articleElement;
-}
-//Добавление карточки в контейнер
-const addCard = (element) => {
-  const article = createNewCard(element);
-  cardContainer.prepend(article);
-}
-
-//создание карточек при загрузке страницы
-const initialCardList = new Section({
-    items: initialCards,
-    renderer: addCard,
-  },
-  cardContainerSelector);
-
-initialCardList.renderItems();
-
-//Форма редактирования места
-const handleCardFormSubmit = ({ 'place-title': name, 'place-description': link }) => {
-  addCard({ name, link })
-  formValidators[cardCreator.name].resetValidation();
-  cardPopup.close()
-}
-
-const cardPopup = new PopupWithForm(document.querySelector('.new-place'), handleCardFormSubmit);
-cardPopup.setEventListeners();
-
-
-//Форма редактирования профиля
-const handleProfileFormSubmit = (data) => {
-  userInfo.setUserInfo(data);
-  profilePopup.close()
-}
-
-const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'), handleProfileFormSubmit);
-profilePopup.setEventListeners();
-
 //Экземпляр профиля пользователя
 const userInfo = new UserInfo({
   nameSelector: ".profile__name",
   aboutSelector: ".profile__about"
 });
+
+//Экземпляр картинки
+const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
+imagePopup.setEventListeners();
+
+//создание карточек при загрузке страницы
+const initialCardList = new Section({
+  items: initialCards,
+  renderer: (element) => {
+    const article = new Card(element, cardSelector, imagePopup.open);
+    return article.createCard();
+  },
+},
+  cardContainerSelector);
+
+initialCardList.renderItems();
+
+//Форма редактирования места
+const cardPopup = new PopupWithForm(document.querySelector('.new-place'), (data) => {
+  initialCardList.addItem(data);
+});
+
+cardPopup.setEventListeners();
 
 //Слушатель на добавление карточки
 buttonOpenAddCardPopup.addEventListener('click', () => {
@@ -91,9 +68,17 @@ buttonOpenAddCardPopup.addEventListener('click', () => {
   cardPopup.open()
 })
 
+//Форма редактирования профиля
+const handleProfileFormSubmit = (data) => {
+  userInfo.setUserInfo(data);
+}
+
+const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'), handleProfileFormSubmit);
+profilePopup.setEventListeners();
+
 //Слушатель на профиль
 buttonOpenEditProfilePopup.addEventListener('click', () => {
   profilePopup.setInputValues(userInfo.getUserInfo())
-  formValidators[addForm.name].resetValidation()
+  formValidators[editForm.name].resetValidation()
   profilePopup.open()
 })
