@@ -56,10 +56,10 @@ const initialCardList = new Section({
 initialCardList.renderItems();
 
 //Форма редактирования места
-const cardPopup = new PopupWithForm(document.querySelector('.new-place'), (data) => {
-  initialCardList.addItem(data);
-});
-
+const cardPopup = new PopupWithForm(document.querySelector('.new-place'),
+  (data) => {
+    initialCardList.addItem(data);
+  });
 cardPopup.setEventListeners();
 
 //Слушатель на добавление карточки
@@ -69,11 +69,10 @@ buttonOpenAddCardPopup.addEventListener('click', () => {
 })
 
 //Форма редактирования профиля
-const handleProfileFormSubmit = (data) => {
-  userInfo.setUserInfo(data);
-}
-
-const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'), handleProfileFormSubmit);
+const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'),
+  (data) => {
+    userInfo.setUserInfo(data);
+  });
 profilePopup.setEventListeners();
 
 //Слушатель на профиль
