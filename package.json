@@ -1,0 +1,18 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "#### Проектная работа Mesto: ООП и разбиение на модули ###### Ссылка на курс - https://practicum.yandex.ru/web/ ###### Cсылка на GitHub - https://nskmikhey.github.io/mesto/",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve"
+  } ,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  }
+}
