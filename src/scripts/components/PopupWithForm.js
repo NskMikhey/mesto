@@ -6,7 +6,6 @@ export default class PopupWithForm extends Popup {
     this._submitFormCallback = submitFormCallback;
     this._form = this._popupSelector.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
-    this._submitButton = this._form.querySelector('.popup__submit');
   }
 
   //приватный метод, который собирает данные всех полей формы.

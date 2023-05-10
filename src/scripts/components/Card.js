@@ -21,9 +21,9 @@ export default class Card {
     this._removeButton = this._element.querySelector('.card__remove');
     this._cardTitle = this._element.querySelector('.card__title');
     this._setEventListeners();
-    this._cardTitle.textContent = this._data.name;
+    this._cardTitle.textContent = this._data.title;
     this._cardImage.src = this._data.link;
-    this._cardImage.alt = this._data.name;
+    this._cardImage.alt = this._data.title;
     return this._element;
   }
 
