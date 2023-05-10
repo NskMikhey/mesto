@@ -40,7 +40,7 @@ const userInfo = new UserInfo({
 });
 
 //Экземпляр картинки
-const imagePopup = new PopupWithImage(document.querySelector('.image-popup'));
+const imagePopup = new PopupWithImage('.image-popup');
 imagePopup.setEventListeners();
 
 //создание карточек при загрузке страницы
@@ -56,7 +56,7 @@ const initialCardList = new Section({
 initialCardList.renderItems();
 
 //Форма редактирования места
-const cardPopup = new PopupWithForm(document.querySelector('.new-place'),
+const cardPopup = new PopupWithForm('.new-place',
   (data) => {
     initialCardList.addItem(data);
   });
@@ -69,7 +69,7 @@ buttonOpenAddCardPopup.addEventListener('click', () => {
 })
 
 //Форма редактирования профиля
-const profilePopup = new PopupWithForm(document.querySelector('.edit-profile'),
+const profilePopup = new PopupWithForm('.edit-profile',
   (data) => {
     userInfo.setUserInfo(data);
   });
@@ -81,3 +81,4 @@ buttonOpenEditProfilePopup.addEventListener('click', () => {
   formValidators[editForm.name].resetValidation()
   profilePopup.open()
 })
+
