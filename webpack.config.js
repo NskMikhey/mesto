@@ -1,4 +1,7 @@
-const path = require('path')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 module.exports = {
   entry: {
     main: './src/pages/index.js',
@@ -18,4 +21,12 @@ module.exports = {
     compress: true,
     port: 8080,
   },
-}
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
+    new CleanWebpackPlugin(),
+  ]
+};
+
