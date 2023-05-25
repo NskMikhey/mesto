@@ -72,8 +72,6 @@ const initialCardList = new Section((element) => {
   initialCardList.addItem(createNewCard(element))
 }, cardContainerSelector);
 
-initialCardList.renderItems(initialCards);
-
 //Форма редактирования места
 const cardPopup = new PopupWithForm('.new-place',
   (data) => {
@@ -107,13 +105,14 @@ Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([dataUser, dataCard]) => {
     const { name: name, about: about, _id, avatar } = dataUser
     userInfo.setUserInfo({ name, about, _id, avatar });
-    dataCard.forEach(element => element.cardId = dataUser._id);
+    dataCard.forEach(element => element.myId = dataUser._id);
+    // console.log(dataCard)
     initialCardList.renderItems(dataCard);
   })
   .catch(console.error)
 
 //Аватар
-const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }, submitBtn) => {
+const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
   api
     .setUserAvatar(avatar)
     .then((result) => {

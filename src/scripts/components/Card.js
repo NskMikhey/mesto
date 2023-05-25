@@ -4,6 +4,9 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
     this._openRemoveCard = openRemoveCard;
+    this._myId = data.myId;
+    this._owner = data.owner;
+    console.log(data.owner._id)
 
   }
 
@@ -15,7 +18,7 @@ export default class Card {
     return cardElement;
   }
 
-  //метод, который возвращает полностью работоспособный и наполненный данными элемент карточки
+  //метод, который возвращает наполненный данными элемент карточки
   createCard() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.card__like');
@@ -23,7 +26,7 @@ export default class Card {
     this._removeButton = this._element.querySelector('.card__remove');
     this._cardTitle = this._element.querySelector('.card__title');
     this._setEventListeners();
-    this._cardTitle.textContent = this._data.title;
+    this._cardTitle.textContent = this._data.name;
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
     return this._element;
