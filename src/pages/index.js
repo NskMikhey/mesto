@@ -51,16 +51,26 @@ const userInfo = new UserInfo({
 const imagePopup = new PopupWithImage('.image-popup');
 imagePopup.setEventListeners();
 
+//Удаление карточки
+const popupRemoveCard = new PopupDelete('.delete-popup', (element) => {
+  element.deleteCard();
+  popupRemoveCard.close()
+})
+popupRemoveCard.setEventListeners()
+
 
 //создание карточек при загрузке страницы
 function createNewCard(element) {
-  const article = new Card(element, cardSelector, imagePopup.open);
+  const article = new Card(element,
+    cardSelector,
+    imagePopup.open,
+    popupRemoveCard.open);
   return article.createCard();
 }
 
 const initialCardList = new Section((element) => {
-    initialCardList.addItem(createNewCard(element))
-  }, cardContainerSelector);
+  initialCardList.addItem(createNewCard(element))
+}, cardContainerSelector);
 
 initialCardList.renderItems(initialCards);
 
@@ -97,7 +107,7 @@ Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([dataUser, dataCard]) => {
     const { name: name, about: about, _id, avatar } = dataUser
     userInfo.setUserInfo({ name, about, _id, avatar })
-    console.log(dataCard)
+    //console.log(dataCard)
   })
   .catch(console.error)
 

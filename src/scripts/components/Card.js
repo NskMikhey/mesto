@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(data, cardSelector, openImagePopup) {
+  constructor(data, cardSelector, openImagePopup, openRemoveCard) {
     this._data = data;
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
+    this._openRemoveCard = openRemoveCard;
   }
 
   _getTemplate() {
@@ -27,6 +28,11 @@ export default class Card {
     return this._element;
   }
 
+  deleteCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
   //приватные методы, которые работают с разметкой, устанавливают слушателей событий
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
@@ -48,8 +54,7 @@ export default class Card {
   }
 
   _handleDeleteIcon() {
-    this._element.remove();
-    this._element = null;
+    this._openRemoveCard(this)
   }
 
   _handleCardClick() {
