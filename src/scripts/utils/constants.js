@@ -27,10 +27,13 @@ const initialCards = [
 
 const editForm = document.forms['profileContent'];
 const cardCreator = document.forms['newPlaceForm'];
+const editAvatar = document.forms['editAvatar'];
 //Кнопка редактирования профиля
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
 //Кнопка открытия попапа карточек
 const buttonOpenAddCardPopup = document.querySelector('.profile__add-button');
+//Кнопка открытия попапа аватара
+const avatarEditBtn = document.querySelector('.profile__edit-avatar-button')
 //массив с карточками
 const cardSelector = '.card-template';
 const cardContainerSelector = '.elements';
@@ -54,5 +57,7 @@ export {
   buttonOpenAddCardPopup,
   buttonOpenEditProfilePopup,
   cardSelector,
-  cardContainerSelector
+  cardContainerSelector,
+  editAvatar,
+  avatarEditBtn
 }

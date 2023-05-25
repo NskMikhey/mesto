@@ -43,7 +43,7 @@ export default class Api {
     }).then(this._handlePromiseReturn)
   }
 
-  /** Работа с карточками */
+  // Работа с карточками
   //Получает карточки с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {

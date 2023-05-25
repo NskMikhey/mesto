@@ -16,8 +16,7 @@
   <main class="content">
     <section class="profile">
       <button class="profile__edit-avatar-button button-hover" aria-label="Редактировать аватар"></button>
-      <img class="profile__avatar-photo" src="#" alt="аватар">
-
+      <img class="profile__avatar" src="#" alt="аватар">
       <div class="profile__info">
         <h1 class="profile__name"></h1>
         <button class="profile__edit-button button-hover" type="button" title="Отредактировать данные"
@@ -120,17 +119,19 @@
     <div class="popup__container">
       <button class="popup__close-button button-hover" type="button" aria-label="Закрыть окно"></button>
       <h2 class="popup__title">Обновить аватар</h2>
-      <form class="popup__form" name="updateAvatarForm" novalidate>
+      <form class="popup__form" name="editAvatar" novalidate>
         <label class="popup__input-group" for="avatar_url">
           <input
-          class="popup__input popup__input_place_avatar"
-          type="url"
-          placeholder="Ссылка на картинку"
-          value=""
-          name="avatar"
-          id="avatar_url"
-          required>
-          <span class="popup__error popup__error_type_avatar"></span>
+            type="url"
+            class="popup__input popup__input_profile-avatar"
+            name="profile-avatar"
+            id="profile-avatar"
+            placeholder="Ссылка на картинку"
+            required
+          />
+          <span
+            class="popup__error popup__error_type_profile-avatar"
+          ></span>
         </label>
         <button class="popup__submit" type="submit" data-value="Сохранить">Сохранить</button>
       </form>
