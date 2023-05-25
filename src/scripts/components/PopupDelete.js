@@ -9,7 +9,6 @@ export default class PopupDelete extends Popup {
 
   open = (element) => {
     super.open();
-    console.log(element)
     this._element = element;
 
   }
@@ -18,7 +17,7 @@ export default class PopupDelete extends Popup {
     super.setEventListeners()
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._removeCard();
+      this._removeCard(this._element);
       this.close();
     })
   }

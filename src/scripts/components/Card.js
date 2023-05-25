@@ -5,7 +5,18 @@ export default class Card {
     this._openImagePopup = openImagePopup;
     this._openRemoveCard = openRemoveCard;
   }
-
+  // constructor({item, currentUser, handleCardClick, handleDeleteCard, handleLikeCard}, cardTemplateSelector) {
+  //   this._cardId = item._id;
+  //   this._name = item.name;
+  //   this._link = item.link;
+  //   this._likes = item.likes;
+  //   this._ownerId = item.owner._id;
+  //   this._cardElement = cardTemplateSelector;
+  //   this._handleCardClick = handleCardClick;
+  //   this._handleDeleteCard = handleDeleteCard;
+  //   this._handleLikeCard = handleLikeCard;
+  //   this._currentUser = currentUser;
+  // }
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
