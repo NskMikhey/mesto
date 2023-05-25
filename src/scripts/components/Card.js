@@ -4,19 +4,10 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
     this._openRemoveCard = openRemoveCard;
+    this._cardId = data._id;
+    //console.log(_cardId)
   }
-  // constructor({item, currentUser, handleCardClick, handleDeleteCard, handleLikeCard}, cardTemplateSelector) {
-  //   this._cardId = item._id;
-  //   this._name = item.name;
-  //   this._link = item.link;
-  //   this._likes = item.likes;
-  //   this._ownerId = item.owner._id;
-  //   this._cardElement = cardTemplateSelector;
-  //   this._handleCardClick = handleCardClick;
-  //   this._handleDeleteCard = handleDeleteCard;
-  //   this._handleLikeCard = handleLikeCard;
-  //   this._currentUser = currentUser;
-  // }
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -35,7 +26,7 @@ export default class Card {
     this._setEventListeners();
     this._cardTitle.textContent = this._data.title;
     this._cardImage.src = this._data.link;
-    this._cardImage.alt = this._data.title;
+    this._cardImage.alt = this._data.name;
     return this._element;
   }
 

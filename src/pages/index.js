@@ -106,8 +106,9 @@ buttonOpenEditProfilePopup.addEventListener('click', () => {
 Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([dataUser, dataCard]) => {
     const { name: name, about: about, _id, avatar } = dataUser
-    userInfo.setUserInfo({ name, about, _id, avatar })
-    //console.log(dataCard)
+    userInfo.setUserInfo({ name, about, _id, avatar });
+    dataCard.forEach(element => element.cardId = dataUser._id);
+    initialCardList.renderItems(dataCard);
   })
   .catch(console.error)
 

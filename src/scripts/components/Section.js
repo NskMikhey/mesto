@@ -11,8 +11,13 @@ export default class Section {
     })
   }
 
-  //метод, который принимает DOM-элемент и добавляет его в контейнер
+  //Добавляет созданный элемент в начало контейнера
   addItem(item) {
     this._containerSelector.prepend(item);
+  }
+
+  //Добавляет элемент в конец контейнера
+  addItem(item) {
+    this._containerSelector.append(item);
   }
 }
