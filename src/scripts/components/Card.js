@@ -4,8 +4,7 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
     this._openRemoveCard = openRemoveCard;
-    this._cardId = data._id;
-    //console.log(_cardId)
+
   }
 
   _getTemplate() {
