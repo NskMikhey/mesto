@@ -69,6 +69,7 @@ const popupRemoveCard = new PopupDelete('.delete-popup', ({ card, cardId }) => {
       popupRemoveCard.close()
     })
     .catch(console.error)
+
 })
 popupRemoveCard.setEventListeners()
 
@@ -81,6 +82,9 @@ const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
       avatarEditPopup.close()
     })
     .catch(console.error)
+    .finally(() => {
+      avatarEditPopup.renderLoading();
+    })
 }
 //Экземпляр формы редактирования аватара
 const avatarEditPopup = new PopupWithForm(
