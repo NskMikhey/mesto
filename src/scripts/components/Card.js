@@ -10,6 +10,7 @@ export default class Card {
     this._likes = data.likes;
     this._likeCard = likeCard
     this._unlikeCard = unlikeCard
+    console.log(this._likes)
 
   }
 
@@ -36,6 +37,11 @@ export default class Card {
     if (this._myId !== this._ownerId) {
       this._removeButton.remove();
     }
+  }
+
+  isLike(likes) {
+    this._likeButton.classList.toggle('card__like_active');
+    this._cardLikeCounter.textContent = likes.length;
   }
 
   //возвращает наполненный данными элемент карточки
@@ -77,7 +83,7 @@ export default class Card {
 
   //приватные методы для каждого обработчика
   _handleLikeIcon() {
-    this._likeCard(this._cardId)
+    this._likeCard(this._likeButton, this._cardId)
     // this._likeButton.classList.toggle('card__like_active');
   }
 

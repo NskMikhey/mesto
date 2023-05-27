@@ -112,18 +112,33 @@ buttonOpenEditProfilePopup.addEventListener('click', () => {
   profilePopup.open()
 })
 
-//создание карточек при загрузке страницы
+//Создает экземпляры карточек
 function createNewCard(element) {
   const article = new Card(element,
     cardSelector,
     imagePopup.open,
-    popupRemoveCard.open
-    
-    );
+    popupRemoveCard.open,
+    (likeButton, cardId) => {
+      if (likeButton.classList.contains('card__like_active')) {
+        api.unlikeCard(cardId)
+          .then(res => {
+            console.log(res)
+            article.isLike(res.likes)
+          })
+          .catch(console.error);
+      } else {
+        api.likeCard(cardId)
+          .then(res => {
+            console.log(res)
+            article.isLike(res.likes)
+          })
+          .catch(console.error);
+      }
+    });
   return article.createCard();
 }
 
-//экземпляр класса Section
+//Создает новую секцию для галереи
 const initialCardList = new Section((element) => {
   initialCardList.addItem(createNewCard(element))
 }, cardContainerSelector);
