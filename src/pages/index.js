@@ -19,7 +19,7 @@ import UserInfo from "../scripts/components/UserInfo.js";
 import PopupDelete from '../scripts/components/PopupDelete.js';
 import Api from '../scripts/components/Api.js';
 
-
+//Экземпляр API
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
   headers: {
@@ -27,6 +27,16 @@ const api = new Api({
     'Content-Type': 'application/json',
   },
 })
+
+//получение данных пользователя и массива карточек
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([dataUser, dataCard]) => {
+    const { name: name, about: about, _id, avatar } = dataUser
+    userInfo.setUserInfo({ name, about, _id, avatar });
+    dataCard.forEach(element => element.myId = dataUser._id);
+    initialCardList.renderItems(dataCard);
+  })
+  .catch(console.error)
 
 //Создать экземпляр класса валидатора, включить валидацию формы.
 
@@ -57,16 +67,6 @@ const popupRemoveCard = new PopupDelete('.delete-popup', (element) => {
 })
 popupRemoveCard.setEventListeners()
 
-
-//создание карточек при загрузке страницы
-function createNewCard(element) {
-  const article = new Card(element,
-    cardSelector,
-    imagePopup.open,
-    popupRemoveCard.open);
-  return article.createCard();
-}
-
 //Аватар
 const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
   api
@@ -91,6 +91,36 @@ const openAvatarPopup = () => {
 }
 
 avatarEditBtn.addEventListener('click', openAvatarPopup);
+
+//Форма редактирования профиля
+const profilePopup = new PopupWithForm('.edit-profile',
+  (data) => {
+    api
+      .setUserData(data)
+      .then(({ name: name, about: about, ...res }) => {
+        userInfo.setUserInfo({ name, about, ...res })
+        profilePopup.close()
+      })
+      .catch(console.error);
+  });
+profilePopup.setEventListeners();
+
+//Слушатель на профиль
+buttonOpenEditProfilePopup.addEventListener('click', () => {
+  profilePopup.setInputValues(userInfo.getUserInfo())
+  formValidators[editForm.name].resetValidation()
+  profilePopup.open()
+})
+
+//создание карточек при загрузке страницы
+function createNewCard(element) {
+  const article = new Card(element,
+    cardSelector,
+    imagePopup.open,
+    popupRemoveCard.open);
+  return article.createCard();
+}
+
 //экземпляр класса Section
 const initialCardList = new Section((element) => {
   initialCardList.addItem(createNewCard(element))
@@ -114,35 +144,3 @@ buttonOpenAddCardPopup.addEventListener('click', () => {
   formValidators[cardCreator.name].resetValidation()
   cardPopup.open()
 })
-
-//Форма редактирования профиля
-const profilePopup = new PopupWithForm('.edit-profile',
-  (data) => {
-    api
-      .setUserData(data)
-      .then(({ name: name, about: about, ...res }) => {
-        userInfo.setUserInfo({ name, about, ...res })
-        profilePopup.close()
-      })
-      .catch(console.error);
-  });
-profilePopup.setEventListeners();
-
-//Слушатель на профиль
-buttonOpenEditProfilePopup.addEventListener('click', () => {
-  profilePopup.setInputValues(userInfo.getUserInfo())
-  formValidators[editForm.name].resetValidation()
-  profilePopup.open()
-})
-
-//-----------------------ПР9------------------------------------------------------------------------------------
-
-Promise.all([api.getUserData(), api.getInitialCards()])
-  .then(([dataUser, dataCard]) => {
-    const { name: name, about: about, _id, avatar } = dataUser
-    userInfo.setUserInfo({ name, about, _id, avatar });
-    dataCard.forEach(element => element.myId = dataUser._id);
-    initialCardList.renderItems(dataCard);
-  })
-  .catch(console.error)
-

@@ -7,7 +7,6 @@ export default class Card {
     this._myId = data.myId;
     this._ownerId = data.owner._id;
     this._likes = data.likes;
-    this._likesLength = data.likes.length;
 
   }
 
@@ -18,7 +17,7 @@ export default class Card {
         return
       }
     });
-    this._cardLikeCounter.textContent = this._likesLength;
+    this._cardLikeCounter.textContent = this._likes.length;
   }
 
   _getTemplate() {
