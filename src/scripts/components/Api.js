@@ -63,22 +63,22 @@ export default class Api {
     }).then(this._handlePromiseReturn)
   }
   //Ставит лайк
-  likeCard(identifier) {
-    return fetch(`${this._baseUrl}/cards/${identifier}/likes`, {
+  likeCard(cardID) {
+    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
       method: 'PUT',
       headers: this._headers,
     }).then(this._handlePromiseReturn)
   }
   //Удаляет лайк
-  unlikeCard(identifier) {
-    return fetch(`${this._baseUrl}/cards/${identifier}/likes`, {
+  unlikeCard(cardID) {
+    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._handlePromiseReturn)
   }
   //Удаляет карточку с сервера
-  removeCard(identifier) {
-    return fetch(`${this._baseUrl}/cards/${identifier}`, {
+  removeCard(cardID) {
+    return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._handlePromiseReturn)

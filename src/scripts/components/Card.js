@@ -10,8 +10,6 @@ export default class Card {
     this._likes = data.likes;
     this._likeCard = likeCard
     this._unlikeCard = unlikeCard
-    console.log(this._likes)
-
   }
 
   _updateLikes() {
@@ -84,11 +82,10 @@ export default class Card {
   //приватные методы для каждого обработчика
   _handleLikeIcon() {
     this._likeCard(this._likeButton, this._cardId)
-    // this._likeButton.classList.toggle('card__like_active');
   }
 
   _handleDeleteIcon() {
-    this._openRemoveCard(this)
+    this._openRemoveCard({ card: this, cardId: this._cardId })
   }
 
   _handleCardClick() {

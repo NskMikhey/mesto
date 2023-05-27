@@ -61,9 +61,14 @@ const imagePopup = new PopupWithImage('.image-popup');
 imagePopup.setEventListeners();
 
 //Экземпляр popup удаления карточки
-const popupRemoveCard = new PopupDelete('.delete-popup', (element) => {
-  element.deleteCard();
-  popupRemoveCard.close()
+const popupRemoveCard = new PopupDelete('.delete-popup', ({ card, cardId }) => {
+  api
+    .removeCard(cardId)
+    .then(() => {
+      card.deleteCard()
+      popupRemoveCard.close()
+    })
+    .catch(console.error);
 })
 popupRemoveCard.setEventListeners()
 
@@ -71,7 +76,7 @@ popupRemoveCard.setEventListeners()
 const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
   api
     .setUserAvatar(avatar)
-    .then((res) => {
+    .then(res => {
       userInfo.setUserInfo(res)
       avatarEditPopup.close()
     })
@@ -120,16 +125,16 @@ function createNewCard(element) {
     popupRemoveCard.open,
     (likeButton, cardId) => {
       if (likeButton.classList.contains('card__like_active')) {
-        api.unlikeCard(cardId)
+        api
+          .unlikeCard(cardId)
           .then(res => {
-            console.log(res)
             article.isLike(res.likes)
           })
           .catch(console.error);
       } else {
-        api.likeCard(cardId)
+        api
+          .likeCard(cardId)
           .then(res => {
-            console.log(res)
             article.isLike(res.likes)
           })
           .catch(console.error);
@@ -143,7 +148,7 @@ const initialCardList = new Section((element) => {
   initialCardList.addItem(createNewCard(element))
 }, cardContainerSelector);
 
-//Форма редактирования места
+//Экземпляр формы добавления карточки
 const cardPopup = new PopupWithForm('.new-place',
   (data) => {
     Promise.all([api.getUserData(), api.addNewCard(data)])
