@@ -118,6 +118,7 @@ const profilePopup = new PopupWithForm('.edit-profile',
         userInfo.setUserInfo({ name, about, ...res })
         profilePopup.close()
       })
+      .catch(console.error);
   });
 profilePopup.setEventListeners();
 
