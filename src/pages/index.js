@@ -68,7 +68,7 @@ const popupRemoveCard = new PopupDelete('.delete-popup', ({ card, cardId }) => {
       card.deleteCard()
       popupRemoveCard.close()
     })
-    .catch(console.error);
+    .catch(console.error)
 })
 popupRemoveCard.setEventListeners()
 
@@ -80,7 +80,7 @@ const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
       userInfo.setUserInfo(res)
       avatarEditPopup.close()
     })
-    .catch(console.error);
+    .catch(console.error)
 }
 //Экземпляр формы редактирования аватара
 const avatarEditPopup = new PopupWithForm(
@@ -106,7 +106,7 @@ const profilePopup = new PopupWithForm('.edit-profile',
         userInfo.setUserInfo({ name, about, ...res })
         profilePopup.close()
       })
-      .catch(console.error);
+      .catch(console.error)
   });
 profilePopup.setEventListeners();
 
@@ -130,14 +130,14 @@ function createNewCard(element) {
           .then(res => {
             article.isLike(res.likes)
           })
-          .catch(console.error);
+          .catch(console.error)
       } else {
         api
           .likeCard(cardId)
           .then(res => {
             article.isLike(res.likes)
           })
-          .catch(console.error);
+          .catch(console.error)
       }
     });
   return article.createCard();
@@ -157,7 +157,7 @@ const cardPopup = new PopupWithForm('.new-place',
         initialCardList.addNewItem(createNewCard(dataCard))
         cardPopup.close()
       })
-      .catch(console.error);
+      .catch(console.error)
   });
 cardPopup.setEventListeners();
 
