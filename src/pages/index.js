@@ -99,7 +99,13 @@ const initialCardList = new Section((element) => {
 //Форма редактирования места
 const cardPopup = new PopupWithForm('.new-place',
   (data) => {
-    initialCardList.addNewItem(createNewCard(data));
+    Promise.all([api.getUserData(), api.addNewCard(data)])
+      .then(([dataUser, dataCard]) => {
+        dataCard.myId = dataUser._id;
+        initialCardList.addNewItem(createNewCard(dataCard))
+        cardPopup.close()
+      })
+      .catch(console.error);
   });
 cardPopup.setEventListeners();
 

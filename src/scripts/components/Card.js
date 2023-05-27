@@ -6,9 +6,19 @@ export default class Card {
     this._openRemoveCard = openRemoveCard;
     this._myId = data.myId;
     this._ownerId = data.owner._id;
-    // console.log(this._myId)
-    // console.log(this._ownerId)
+    this._likes = data.likes;
+    this._likesLength = data.likes.length;
 
+  }
+
+  _updateLikes() {
+    this._likes.forEach(element => {
+      if (element._id === this._myId) {
+        this._likeButton.classList.toggle('card__like_active')
+        return
+      }
+    });
+    this._cardLikeCounter.textContent = this._likesLength;
   }
 
   _getTemplate() {
@@ -31,10 +41,12 @@ export default class Card {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.card__like');
     this._cardImage = this._element.querySelector('.card__image');
+    this._cardLikeCounter = this._element.querySelector('.card__like-counter');
     this._removeButton = this._element.querySelector('.card__remove');
     this._cardTitle = this._element.querySelector('.card__title');
-    this._visibleTrashBtn()
+    this._visibleTrashBtn();
     this._setEventListeners();
+    this._updateLikes();
     this._cardTitle.textContent = this._data.name;
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;

@@ -12,7 +12,7 @@ export default class Api {
     return Promise.reject(`Ошибка ${res.status} ${res.statusText}`)
   }
 
-  /** Работа с данными пользователя */
+  // РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ
   //Получает инфо о пользователе с сервера
   getUserData() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -43,7 +43,7 @@ export default class Api {
     }).then(this._handlePromiseReturn)
   }
 
-  // Работа с карточками
+  // РАБОТА С КАРТОЧКАМИ
   //Получает карточки с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
