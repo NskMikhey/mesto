@@ -1,7 +1,6 @@
 import './index.css';
 import {
   validationParam,
-  initialCards,
   cardSelector,
   editForm,
   cardCreator,
@@ -47,11 +46,11 @@ const userInfo = new UserInfo({
   profileAvatar: ".profile__avatar"
 });
 
-//Экземпляр картинки
+//Экземпляр зум-картинки
 const imagePopup = new PopupWithImage('.image-popup');
 imagePopup.setEventListeners();
 
-//Удаление карточки
+//Экземпляр popup удаления карточки
 const popupRemoveCard = new PopupDelete('.delete-popup', (element) => {
   element.deleteCard();
   popupRemoveCard.close()
@@ -68,55 +67,12 @@ function createNewCard(element) {
   return article.createCard();
 }
 
-const initialCardList = new Section((element) => {
-  initialCardList.addItem(createNewCard(element))
-}, cardContainerSelector);
-
-//Форма редактирования места
-const cardPopup = new PopupWithForm('.new-place',
-  (data) => {
-    initialCardList.addItem(createNewCard(data));
-  });
-cardPopup.setEventListeners();
-
-//Слушатель на добавление карточки
-buttonOpenAddCardPopup.addEventListener('click', () => {
-  formValidators[cardCreator.name].resetValidation()
-  cardPopup.open()
-})
-
-//Форма редактирования профиля
-const profilePopup = new PopupWithForm('.edit-profile',
-  (data) => {
-    userInfo.setUserInfo(data);
-  });
-profilePopup.setEventListeners();
-
-//Слушатель на профиль
-buttonOpenEditProfilePopup.addEventListener('click', () => {
-  profilePopup.setInputValues(userInfo.getUserInfo())
-  formValidators[editForm.name].resetValidation()
-  profilePopup.open()
-})
-
-//-----------------------ПР9------------------------------------------------------------------------------------
-
-Promise.all([api.getUserData(), api.getInitialCards()])
-  .then(([dataUser, dataCard]) => {
-    const { name: name, about: about, _id, avatar } = dataUser
-    userInfo.setUserInfo({ name, about, _id, avatar });
-    dataCard.forEach(element => element.myId = dataUser._id);
-    // console.log(dataCard)
-    initialCardList.renderItems(dataCard);
-  })
-  .catch(console.error)
-
 //Аватар
 const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
   api
     .setUserAvatar(avatar)
-    .then((result) => {
-      userInfo.setUserInfo(result)
+    .then((res) => {
+      userInfo.setUserInfo(res)
       avatarEditPopup.close()
     })
     .catch(console.error);
@@ -135,8 +91,51 @@ const openAvatarPopup = () => {
 }
 
 avatarEditBtn.addEventListener('click', openAvatarPopup);
+//экземпляр класса Section
+const initialCardList = new Section((element) => {
+  initialCardList.addItem(createNewCard(element))
+}, cardContainerSelector);
 
-//Трэш
+//Форма редактирования места
+const cardPopup = new PopupWithForm('.new-place',
+  (data) => {
+    initialCardList.addNewItem(createNewCard(data));
+  });
+cardPopup.setEventListeners();
 
-//------------------------------------------------------------------------------------------------------------
+//Слушатель на добавление карточки
+buttonOpenAddCardPopup.addEventListener('click', () => {
+  formValidators[cardCreator.name].resetValidation()
+  cardPopup.open()
+})
+
+//Форма редактирования профиля
+const profilePopup = new PopupWithForm('.edit-profile',
+  (data) => {
+    api
+      .setUserData(data)
+      .then(({ name: name, about: about, ...res }) => {
+        userInfo.setUserInfo({ name, about, ...res })
+        profilePopup.close()
+      })
+  });
+profilePopup.setEventListeners();
+
+//Слушатель на профиль
+buttonOpenEditProfilePopup.addEventListener('click', () => {
+  profilePopup.setInputValues(userInfo.getUserInfo())
+  formValidators[editForm.name].resetValidation()
+  profilePopup.open()
+})
+
+//-----------------------ПР9------------------------------------------------------------------------------------
+
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([dataUser, dataCard]) => {
+    const { name: name, about: about, _id, avatar } = dataUser
+    userInfo.setUserInfo({ name, about, _id, avatar });
+    dataCard.forEach(element => element.myId = dataUser._id);
+    initialCardList.renderItems(dataCard);
+  })
+  .catch(console.error)
 

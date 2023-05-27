@@ -5,8 +5,9 @@ export default class Card {
     this._openImagePopup = openImagePopup;
     this._openRemoveCard = openRemoveCard;
     this._myId = data.myId;
-    this._owner = data.owner;
-    console.log(data.owner._id)
+    this._ownerId = data.owner._id;
+    // console.log(this._myId)
+    // console.log(this._ownerId)
 
   }
 
@@ -18,13 +19,21 @@ export default class Card {
     return cardElement;
   }
 
-  //метод, который возвращает наполненный данными элемент карточки
+  //если владелец карточки не является текущим пользователем, то корзины нет
+  _visibleTrashBtn() {
+    if (this._myId !== this._ownerId) {
+      this._removeButton.remove();
+    }
+  }
+
+  //возвращает наполненный данными элемент карточки
   createCard() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.card__like');
     this._cardImage = this._element.querySelector('.card__image');
     this._removeButton = this._element.querySelector('.card__remove');
     this._cardTitle = this._element.querySelector('.card__title');
+    this._visibleTrashBtn()
     this._setEventListeners();
     this._cardTitle.textContent = this._data.name;
     this._cardImage.src = this._data.link;

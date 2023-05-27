@@ -12,7 +12,7 @@ export default class Section {
   }
 
   //Добавляет созданный элемент в начало контейнера
-  addItem(item) {
+  addNewItem(item) {
     this._containerSelector.prepend(item);
   }
 
