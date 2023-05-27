@@ -1,12 +1,15 @@
 export default class Card {
-  constructor(data, cardSelector, openImagePopup, openRemoveCard) {
+  constructor(data, cardSelector, openImagePopup, openRemoveCard, likeCard, unlikeCard,) {
     this._data = data;
+    this._cardId = data._id
     this._cardSelector = cardSelector;
     this._openImagePopup = openImagePopup;
     this._openRemoveCard = openRemoveCard;
     this._myId = data.myId;
     this._ownerId = data.owner._id;
     this._likes = data.likes;
+    this._likeCard = likeCard
+    this._unlikeCard = unlikeCard
 
   }
 
@@ -74,7 +77,8 @@ export default class Card {
 
   //приватные методы для каждого обработчика
   _handleLikeIcon() {
-    this._likeButton.classList.toggle('card__like_active');
+    this._likeCard(this._cardId)
+    // this._likeButton.classList.toggle('card__like_active');
   }
 
   _handleDeleteIcon() {

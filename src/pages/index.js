@@ -117,7 +117,9 @@ function createNewCard(element) {
   const article = new Card(element,
     cardSelector,
     imagePopup.open,
-    popupRemoveCard.open);
+    popupRemoveCard.open
+    
+    );
   return article.createCard();
 }
 
