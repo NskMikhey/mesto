@@ -31,9 +31,10 @@ const api = new Api({
 //получение данных пользователя и массива карточек
 Promise.all([api.getUserData(), api.getInitialCards()])
   .then(([dataUser, dataCard]) => {
-    const { name: name, about: about, _id, avatar } = dataUser
-    userInfo.setUserInfo({ name, about, _id, avatar });
+    const { name: name, about: about, avatar } = dataUser
+    userInfo.setUserInfo({ name, about, avatar });
     dataCard.forEach(element => element.myId = dataUser._id);
+    userInfo.setId(dataUser._id);
     initialCardList.renderItems(dataCard);
   })
   .catch(console.error)
@@ -158,9 +159,9 @@ const initialCardList = new Section((element) => {
 //Экземпляр формы добавления карточки
 const cardPopup = new PopupWithForm('.new-place',
   (data) => {
-    Promise.all([api.getUserData(), api.addNewCard(data)])
-      .then(([dataUser, dataCard]) => {
-        dataCard.myId = dataUser._id;
+    api.addNewCard(data)
+      .then(dataCard => {
+        dataCard.myId = userInfo.getId();
         initialCardList.addNewItem(createNewCard(dataCard))
         cardPopup.close()
       })
