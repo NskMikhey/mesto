@@ -83,7 +83,7 @@ const handleAvatarEditSubmit = ({ 'profile-avatar': avatar }) => {
     })
     .catch(console.error)
     .finally(() => {
-      avatarEditPopup.renderLoading();
+      avatarEditPopup.renderLoading(false);
     })
 }
 //Экземпляр формы редактирования аватара
@@ -101,7 +101,7 @@ const openAvatarPopup = () => {
 
 avatarEditBtn.addEventListener('click', openAvatarPopup);
 
-//Форма редактирования профиля
+//Экземпляр формы редактирования профиля
 const profilePopup = new PopupWithForm('.edit-profile',
   (data) => {
     api
@@ -111,6 +111,9 @@ const profilePopup = new PopupWithForm('.edit-profile',
         profilePopup.close()
       })
       .catch(console.error)
+      .finally(() => {
+        profilePopup.renderLoading(false);
+      })
   });
 profilePopup.setEventListeners();
 
@@ -162,6 +165,9 @@ const cardPopup = new PopupWithForm('.new-place',
         cardPopup.close()
       })
       .catch(console.error)
+      .finally(() => {
+        cardPopup.renderLoading(false);
+      })
   });
 cardPopup.setEventListeners();
 
